@@ -44,6 +44,19 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
 
       foreach (var item in _keys)
         list.Items.Add(item);
+
+      list.SelectedIndex = 0;
+
+      datakey.Text = GetDataKey(_path);
+    }
+
+    private string GetDataKey(string path)
+    {
+      using (var md5 = System.Security.Cryptography.MD5.Create())
+      {
+        var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(path));
+        return string.Join("", hash.Select(x => x.ToString("X2")));
+      }
     }
 
     private void btn_export_Click(object sender, EventArgs e)
@@ -55,14 +68,18 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
       var columns = GetColumns();
       var copy = _data.Select(x => x.ToDictionary(y => columns[y.Key], y => y.Value)).ToArray();
 
-      File.WriteAllText(Path.Combine(path, name + ".sec.json"), JsonConvert.SerializeObject(copy));
-      File.WriteAllText(Path.Combine(path, name + ".sec.schema.json"), JsonConvert.SerializeObject(GetSchema(columns, copy.First())));
+      var secDir = Path.Combine(path, datakey.Text);
+      if (!Directory.Exists(secDir))
+        Directory.CreateDirectory(secDir);
+
+      File.WriteAllText(Path.Combine(secDir, "data.json"), JsonConvert.SerializeObject(copy));
+      File.WriteAllText(Path.Combine(secDir, "data.schema"), JsonConvert.SerializeObject(GetSchema(columns, copy.First())));
 
       var hideKeys = new HashSet<string>(list.Items.Where(x => x.CheckState == Telerik.WinControls.Enumerations.ToggleState.On).Select(x => x.Text));
 
       copy = _data.Select(x => x.Where(y => !hideKeys.Contains(y.Key)).ToDictionary(y => columns[y.Key], y => y.Value)).ToArray();
-      File.WriteAllText(Path.Combine(path, name + ".pub.json"), JsonConvert.SerializeObject(copy));
-      File.WriteAllText(Path.Combine(path, name + ".pub.schema.json"), JsonConvert.SerializeObject(GetSchema(columns, copy.First())));
+      File.WriteAllText(Path.Combine(path, "public.json"), JsonConvert.SerializeObject(copy));
+      File.WriteAllText(Path.Combine(path, "public.schema"), JsonConvert.SerializeObject(GetSchema(columns, copy.First())));
       Close();
     }
 
@@ -72,7 +89,7 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
       foreach (var item in columns)
       {
         var name = item.Value;
-        if(!sample.ContainsKey(name))
+        if (!sample.ContainsKey(name))
           continue;
         var type = sample[name]?.GetType();
 

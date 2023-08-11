@@ -34,8 +34,16 @@
       btn_open = new Telerik.WinControls.UI.CommandBarButton();
       btn_export = new Telerik.WinControls.UI.CommandBarButton();
       list = new Telerik.WinControls.UI.RadCheckedListBox();
+      radGroupBox1 = new Telerik.WinControls.UI.RadGroupBox();
+      datakey = new Telerik.WinControls.UI.RadTextBox();
+      radGroupBox2 = new Telerik.WinControls.UI.RadGroupBox();
       ((System.ComponentModel.ISupportInitialize)radCommandBar1).BeginInit();
       ((System.ComponentModel.ISupportInitialize)list).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)radGroupBox1).BeginInit();
+      radGroupBox1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)datakey).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)radGroupBox2).BeginInit();
+      radGroupBox2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)this).BeginInit();
       SuspendLayout();
       // 
@@ -45,7 +53,7 @@
       radCommandBar1.Location = new System.Drawing.Point(0, 0);
       radCommandBar1.Name = "radCommandBar1";
       radCommandBar1.Rows.AddRange(new Telerik.WinControls.UI.CommandBarRowElement[] { commandBarRowElement1 });
-      radCommandBar1.Size = new System.Drawing.Size(587, 56);
+      radCommandBar1.Size = new System.Drawing.Size(587, 31);
       radCommandBar1.TabIndex = 0;
       // 
       // commandBarRowElement1
@@ -82,10 +90,45 @@
       list.Dock = System.Windows.Forms.DockStyle.Fill;
       list.GroupItemSize = new System.Drawing.Size(200, 28);
       list.ItemSize = new System.Drawing.Size(200, 28);
-      list.Location = new System.Drawing.Point(0, 56);
+      list.Location = new System.Drawing.Point(2, 18);
       list.Name = "list";
-      list.Size = new System.Drawing.Size(587, 373);
+      list.Size = new System.Drawing.Size(583, 333);
       list.TabIndex = 1;
+      // 
+      // radGroupBox1
+      // 
+      radGroupBox1.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+      radGroupBox1.Controls.Add(datakey);
+      radGroupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+      radGroupBox1.HeaderMargin = new System.Windows.Forms.Padding(1);
+      radGroupBox1.HeaderText = "1. Data-Key (Vorschlag ggf. ändern)";
+      radGroupBox1.Location = new System.Drawing.Point(0, 31);
+      radGroupBox1.Name = "radGroupBox1";
+      radGroupBox1.Size = new System.Drawing.Size(587, 45);
+      radGroupBox1.TabIndex = 2;
+      radGroupBox1.Text = "1. Data-Key (Vorschlag ggf. ändern)";
+      // 
+      // datakey
+      // 
+      datakey.Dock = System.Windows.Forms.DockStyle.Fill;
+      datakey.Location = new System.Drawing.Point(2, 18);
+      datakey.Name = "datakey";
+      datakey.Size = new System.Drawing.Size(583, 24);
+      datakey.TabIndex = 0;
+      datakey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      // 
+      // radGroupBox2
+      // 
+      radGroupBox2.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+      radGroupBox2.Controls.Add(list);
+      radGroupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+      radGroupBox2.HeaderMargin = new System.Windows.Forms.Padding(1);
+      radGroupBox2.HeaderText = "2. Wählen Sie die Daten aus, die sie schützen möchten:";
+      radGroupBox2.Location = new System.Drawing.Point(0, 76);
+      radGroupBox2.Name = "radGroupBox2";
+      radGroupBox2.Size = new System.Drawing.Size(587, 353);
+      radGroupBox2.TabIndex = 3;
+      radGroupBox2.Text = "2. Wählen Sie die Daten aus, die sie schützen möchten:";
       // 
       // RadForm1
       // 
@@ -93,13 +136,20 @@
       AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       ClientSize = new System.Drawing.Size(587, 429);
-      Controls.Add(list);
+      Controls.Add(radGroupBox2);
+      Controls.Add(radGroupBox1);
       Controls.Add(radCommandBar1);
       Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
       Name = "RadForm1";
       Text = "DataPrepper";
       ((System.ComponentModel.ISupportInitialize)radCommandBar1).EndInit();
       ((System.ComponentModel.ISupportInitialize)list).EndInit();
+      ((System.ComponentModel.ISupportInitialize)radGroupBox1).EndInit();
+      radGroupBox1.ResumeLayout(false);
+      radGroupBox1.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)datakey).EndInit();
+      ((System.ComponentModel.ISupportInitialize)radGroupBox2).EndInit();
+      radGroupBox2.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)this).EndInit();
       ResumeLayout(false);
       PerformLayout();
@@ -113,5 +163,8 @@
     private Telerik.WinControls.UI.CommandBarButton btn_open;
     private Telerik.WinControls.UI.CommandBarButton btn_export;
     private Telerik.WinControls.UI.RadCheckedListBox list;
+    private Telerik.WinControls.UI.RadGroupBox radGroupBox1;
+    private Telerik.WinControls.UI.RadTextBox datakey;
+    private Telerik.WinControls.UI.RadGroupBox radGroupBox2;
   }
 }

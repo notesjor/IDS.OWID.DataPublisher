@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDS.OWID.DataPublisher.Tool.Converter", "IDS.OWID.DataPublisher.Tool.Converter\IDS.OWID.DataPublisher.Tool.Converter.csproj", "{088B8C26-3B81-48F0-B2EE-F79984B9BD65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDS.OWID.DataPublisher.Tool.Prepper", "IDS.OWID.DataPublisher.Tool.Prepper\IDS.OWID.DataPublisher.Tool.Prepper.csproj", "{5BD872FB-E680-4354-8DEA-B4EF2DE298FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{088B8C26-3B81-48F0-B2EE-F79984B9BD65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{088B8C26-3B81-48F0-B2EE-F79984B9BD65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{088B8C26-3B81-48F0-B2EE-F79984B9BD65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{088B8C26-3B81-48F0-B2EE-F79984B9BD65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BD872FB-E680-4354-8DEA-B4EF2DE298FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BD872FB-E680-4354-8DEA-B4EF2DE298FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BD872FB-E680-4354-8DEA-B4EF2DE298FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BD872FB-E680-4354-8DEA-B4EF2DE298FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F4E8B4D-6F85-4A8D-BFD9-B54906C84931}
+	EndGlobalSection
+EndGlobal

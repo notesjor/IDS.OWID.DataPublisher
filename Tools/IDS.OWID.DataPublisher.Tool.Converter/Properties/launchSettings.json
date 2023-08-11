@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "IDS.OWID.DataPublisher.Tool.Converter": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\Jan\\Desktop\\Gattin_Gatte_Datenset.xlsx"
+    }
+  }
+}

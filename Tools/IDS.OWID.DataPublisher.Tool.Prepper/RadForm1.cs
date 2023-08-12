@@ -83,7 +83,7 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
       File.WriteAllText(Path.Combine(path, "public.json"), JsonConvert.SerializeObject(copy));
       GetSchema(columns, copy.First(), out var schemaGridPublic, out var schemaPivotPublic);
       File.WriteAllText(Path.Combine(path, "grid.schema"), JsonConvert.SerializeObject(schemaGridPublic));
-      File.WriteAllText(Path.Combine(path, "pivot.schema"), JsonConvert.SerializeObject(schemaGridPublic));
+      File.WriteAllText(Path.Combine(path, "pivot.schema"), JsonConvert.SerializeObject(schemaPivotPublic));
       Close();
     }
 

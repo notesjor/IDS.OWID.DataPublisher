@@ -11,6 +11,9 @@ import { GridComponent, ColumnsDirective, ColumnDirective, Sort, Group, Filter, 
 
 export default {
   name: "ViewGrid",
+  provide: {
+    grid: [Sort, Group, Filter, Page, Resize],
+  },
   components: {
     'ejs-grid': GridComponent,
     'e-columns': ColumnsDirective,
@@ -24,7 +27,7 @@ export default {
     };
   },
   mounted() {
-    fetch('/public.schema')
+    fetch('/grid.schema')
       .then(response => response.json())
       .then(data => { this.schema = data; });
 
@@ -32,10 +35,7 @@ export default {
       .then(response => response.json())
       .then(data => { this.data = data; })
       .then(() => { this.$refs.grid.autoFitColumns(); });
-  },
-  provide: {
-    grid: [Sort, Group, Filter, Page, Resize],
-  },
+  }
 };
 </script>
     

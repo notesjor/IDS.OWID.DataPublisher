@@ -1,5 +1,5 @@
 <template>
-  <ejs-pivotview ref="pivotGrid" :height="height" :width="width" :dataSourceSettings="dataSourceSettings"
+      <ejs-pivotview ref="pivotGrid" :height="height" :width="width" :dataSourceSettings="dataSourceSettings"
     :showFieldList="showFieldList" :showGroupingBar="showGroupingBar" :allowCalculatedField="allowCalculatedField">
   </ejs-pivotview>
 </template>
@@ -26,7 +26,9 @@ export default {
       renderMode: 'Fixed',
     };
   },
-  pivotview: [GroupingBar, FieldList, GroupingBar, CalculatedField],
+  provide: {
+        pivotview: [GroupingBar, FieldList, GroupingBar, CalculatedField]
+    },
 
   mounted() {
     var self = this;
@@ -42,7 +44,7 @@ export default {
               expandAll: false,
               columns: [{ name: 'c20', caption: 'Land' }],
               values: [{ name: 'c01', caption: 'Match' }],
-              rows: [{ name: 'c19' }, { name: 'Jahr' }],
+              rows: [{ name: 'c19', caption: 'Jahr' }],
             };
           });
       });

@@ -5,8 +5,6 @@
 </template>
     
 <script>
-import $ from 'jquery'
-import PivotTable from 'pivottable'
 export default {
   name: "ViewGrid",
   data() {
@@ -25,19 +23,6 @@ export default {
       .then(response => response.json())
       .then(data => { this.data = data; })
       .then(() => { this.$refs.grid.autoFitColumns(); });
-
-      $(function(){
-        $("#output").pivotUI(
-            [
-                {color: "blue", shape: "circle"},
-                {color: "red", shape: "triangle"}
-            ],
-            {
-                rows: ["color"],
-                cols: ["shape"]
-            }
-        );
-     });
   }
 };
 </script>

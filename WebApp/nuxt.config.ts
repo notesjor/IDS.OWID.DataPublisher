@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     },
     plugins: [svgLoader({
       defaultImport: 'url',
-    })]
+    })],
   },
   modules: ['@pinia/nuxt'],  
   runtimeConfig: {

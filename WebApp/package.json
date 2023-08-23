@@ -21,6 +21,8 @@
 	},
 	"dependencies": {
 		"@pinia/nuxt": "^0.4.7",
+		"devextreme": "23.1.4",
+		"devextreme-vue": "23.1.4",
 		"jquery": "^3.7.0",
 		"pinia": "^2.0.33",
 		"pivottable": "^2.23.0",

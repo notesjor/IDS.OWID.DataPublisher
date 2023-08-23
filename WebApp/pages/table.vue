@@ -1,24 +1,14 @@
 <template>
   <div>
-    <ejs-grid ref="grid" :columns="schema" :dataSource="data" :allowSorting="true" :allowGrouping="true"
-      :allowFiltering="true" :allowPaging="true" :allowResizing="true" :pageSettings="pageSettings">
-    </ejs-grid>
+    <div id="output" style="margin: 30px;"></div>
   </div>
 </template>
     
 <script>
-import { GridComponent, ColumnsDirective, ColumnDirective, Sort, Group, Filter, Page, Resize } from '@syncfusion/ej2-vue-grids';
-
+import $ from 'jquery'
+import PivotTable from 'pivottable'
 export default {
   name: "ViewGrid",
-  provide: {
-    grid: [Sort, Group, Filter, Page, Resize],
-  },
-  components: {
-    'ejs-grid': GridComponent,
-    'e-columns': ColumnsDirective,
-    'e-column': ColumnDirective
-  },
   data() {
     return {
       schema: [],
@@ -35,18 +25,19 @@ export default {
       .then(response => response.json())
       .then(data => { this.data = data; })
       .then(() => { this.$refs.grid.autoFitColumns(); });
+
+      $(function(){
+        $("#output").pivotUI(
+            [
+                {color: "blue", shape: "circle"},
+                {color: "red", shape: "triangle"}
+            ],
+            {
+                rows: ["color"],
+                cols: ["shape"]
+            }
+        );
+     });
   }
 };
 </script>
-    
-<style>
-@import "@syncfusion/ej2-base/styles/material.css";
-@import "@syncfusion/ej2-inputs/styles/material.css";
-@import "@syncfusion/ej2-buttons/styles/material.css";
-@import "@syncfusion/ej2-dropdowns/styles/material.css";
-@import "@syncfusion/ej2-lists/styles/material.css";
-@import "@syncfusion/ej2-popups/styles/material.css";
-@import "@syncfusion/ej2-popups/styles/material.css";
-@import "@syncfusion/ej2-navigations/styles/material.css";
-@import "@syncfusion/ej2-grids/styles/material.css";
-</style>

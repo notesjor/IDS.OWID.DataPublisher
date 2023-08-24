@@ -24,7 +24,7 @@
         <v-list density="compact" nav>          
           <nuxt-link to="/table"><v-list-item prepend-icon="mdi-table" title="Tabelle"></v-list-item></nuxt-link>
           <nuxt-link to="/pivot"><v-list-item prepend-icon="mdi-table-pivot" title="Pivot-Tabelle"></v-list-item></nuxt-link>
-          <nuxt-link to="/spreadsheet"><v-list-item prepend-icon="mdi-file-table-outline" title="Editor-Tabelle"></v-list-item></nuxt-link>
+          <nuxt-link to="/download"><v-list-item prepend-icon="mdi-download" title="Download"></v-list-item></nuxt-link>
         </v-list>
       </v-navigation-drawer>
 
@@ -49,8 +49,6 @@
           </div>
         </v-card-text>
       </v-card>
-      <v-spacer></v-spacer>
-      <v-btn variant="outlined" size="x-large" prepend-icon="mdi-arrow-right">Anmelden</v-btn>
     </v-footer>
   </v-app>
 </template>

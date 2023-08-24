@@ -8,14 +8,28 @@
     <v-row>
       <v-col>
         <h2 class="text-xl">Tabelle</h2>
-        <p> Diese Tabellen-Ansicht gibt Ihnen einen direkten Zugriff auf die Daten. Sie können die Tabelle durchsuchen,
-          filtern und gruppieren.</p>
+        <p> Diese Tabellen-Ansicht gibt Ihnen einen direkten Zugriff auf die Daten. Sie können die Tabelle
+          durchsuchen/filtern
+          <Hint :tip="tip_filter" /> und gruppieren
+          <Hint :tip="tip_group" />.
+          Bitte beachten Sie: Die Tabelle zeigt alle Datensätze an - aufgrund der Tabellengröße ist die horizonale und
+          vertikal Darstellung beschnitten. Sie können mit dem Mausrad horizontal und vertikal scrollen
+          <Hint :tip="tip_scroll" />. Außerdem erscheinen Scroll-Leisten, wenn Sie die Maus an den unteren bzw. rechten
+          Rand bewegen.
+        </p>
       </v-col>
     </v-row>
     <v-row>
       <v-col>
-        <DxDataGrid id="grid" ref="grid" :data-source="dataSource">
+        <DxDataGrid id="grid" ref="grid" :data-source="dataSource" :column-auto-width="true" :allow-column-resizing="true"
+          :allow-column-reordering="true" height="600">
           <DxFilterRow :visible="true" />
+          <DxColumn v-for="c in schema" :key="c" :data-field="c.dataField" :caption="c.caption" :allow-fixing="true" />
+          <DxColumnChooser :enabled="true" mode="select" />
+          <DxSorting mode="multiple" />
+          <DxScrolling mode="virtual" />
+          <DxGrouping :context-menu-enabled="true" />
+          <DxGroupPanel :visible="true" />
         </DxDataGrid>
       </v-col>
     </v-row>
@@ -24,55 +38,75 @@
     
 <script>
 import 'devextreme/dist/css/dx.material.blue.light.compact.css';
-import { DxDataGrid, DxColumn, DxFilterRow } from 'devextreme-vue/data-grid';
+import { DxDataGrid, DxColumn, DxFilterRow, DxColumnChooser, DxSorting, DxScrolling, DxGrouping, DxGroupPanel } from 'devextreme-vue/data-grid';
+
+import Hint from '~/components/hint.vue';
+
+import auth from "../korapJsClient/auth.js";
 
 export default {
   name: "ViewGrid",
   components: {
     DxDataGrid,
     DxColumn,
-    DxFilterRow
+    DxFilterRow,
+    DxColumnChooser,
+    DxSorting,
+    DxScrolling,
+    DxGrouping,
+    DxGroupPanel,
+
+    Hint
   },
   data() {
     return {
       schema: [],
       dataSource: {
-        store: [
-          {
-            id: 10248,
-            region: 'North America',
-            country: 'United States of America',
-            city: 'New York',
-            amount: 1740,
-            date: new Date('2013-01-06'),
-          }, {
-            id: 10249,
-            region: 'North America',
-            country: 'United States of America',
-            city: 'Los Angeles',
-            amount: 850,
-            date: new Date('2013-01-13'),
-          }, {
-            id: 10250,
-            region: 'North America',
-            country: 'United States of America',
-            city: 'Denver',
-            amount: 2235,
-            date: new Date('2013-01-07'),
-          }
-        ]
-      }
+        store: []
+      },
+      tip_filter: "Unterhalb jedes Spaltenkopfs finden Sie eine Eingabebox (siehe Lupen-Symbol).<br/>Sie können nach einem Wert suchen, indem Sie diesen Wert in das entsprechende Feld eingeben.<br/>Mit einem Klick auf das Lupen-Symbol können Sie verschiedene Suchoperatoren auswählen.",
+      tip_group: "Sie können die Tabelle nach einer Spalte gruppieren, indem Sie die Spalte in den Bereich oberhalb der Tabelle ziehen.<br/>Sie können die Gruppierung aufheben, indem Sie die Spalte aus dem oberen Bereich erneut auf die Tabelle ziehen.",
+      tip_scroll: "Fast jede modern Maus verfügt über eine vertikale und horizontale Scroll-Funktion.<br/>Für das vertikale Scrollen tippen Sie ggf. das Mausrat von rechts nach links (bzw. umgekehrt) an."
     };
   },
   mounted() {
-    fetch('/grid.schema')
-      .then(response => response.json())
-      .then(data => { this.schema = data; });
-
-    fetch('/public.json')
-      .then(response => response.json())
-      .then(data => { this.data = data; })
-      .then(() => { this.$refs.grid.autoFitColumns(); });
+    if ((new auth()).isSignedIn)
+      this.signIn();
+    else
+      fetch('/schema.json')
+        .then(response => response.json())
+        .then(schema => {
+          this.schema = schema;
+          fetch('/data.json')
+            .then(response => response.json())
+            .then(data => {
+              this.dataSource = {
+                store: data
+              };
+            });
+        });
+  },
+  methods: {
+    signIn() {
+      var key = this.$config.public.dataKey;
+      fetch(`/${key}/schema.json`)
+        .then(response => response.json())
+        .then(schema => {
+          this.schema = schema;
+          fetch(`/${key}/data.json`)
+            .then(response => response.json())
+            .then(data => {
+              this.dataSource = {
+                store: data
+              };
+            });
+        });
+    }
   }
 };
 </script>
+
+<style scoped>.dx-scrollable-scroll {
+  visibility: visible !important;
+
+}</style>

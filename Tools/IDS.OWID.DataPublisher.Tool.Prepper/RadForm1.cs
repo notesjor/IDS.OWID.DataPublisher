@@ -94,9 +94,7 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
           continue;
         var type = sample[name]?.GetType();
 
-        var obj = new Dictionary<string, string> {
-          { "width", "140" }
-        };
+        var obj = new Dictionary<string, string>();
 
         if (type == typeof(int))
           obj.Add("dataType", "number");

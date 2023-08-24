@@ -33,13 +33,16 @@ export default {
     name: "Cite",
     data() {
         return {
-            citeText: null,
-            citeBibTeX: null,
         }
     },
-    mounted() {
-        this.citeText = this.$config.public.citeText;
-        this.citeBibTeX = this.$config.public.citeBibTeX;
+    mounted() {    },
+    computed: {
+        citeText() {
+            return this.$config.public.citeText;
+        },    
+        citeBibTeX() {
+            return this.$config.public.citeBibTeX;
+        },    
     },
 }
 </script>

@@ -2,12 +2,30 @@
   <div>
     <v-row>
       <v-col>
-        <DxChart ref="chart">
-          <DxTooltip :enabled="true" :customize-tooltip="customizeTooltip" />
-          <DxAdaptiveLayout :width="450" />
-          <DxSize :height="200" />
-          <DxCommonSeriesSettings type="spline" />
-        </DxChart>
+        <Signin @signIn="signIn" />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <h2 class="text-xl">Pivot-Tabelle</h2>
+        <p> Die Pivot-Tabelle erlaubt einen interaktiven Auswertung und Kreuz-Vergleiche.
+          Für das Datenset wurden folgende Beispiel-Analysen hinterlegt:
+          Die Visualisierung ist direkt mit der oben angezeigten Pivot-Tabelle verknüpft. Sie können zudem die
+          Darstellungsmodi wie folgt ändern:</p>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-chip v-for="profile in pivotProfiles" :key="profile.label" style="margin-right: 10px;">
+          {{ profile.label }}
+        </v-chip>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <p> Alternativ können Sie aufch auf das Einstellungs-Symbol (
+        <p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
+        oben links in der Pivot-Tabelle klicken und eigene Vergleiche und Fitlerungen vorzunehmen.</p>
       </v-col>
     </v-row>
     <v-row>
@@ -17,6 +35,34 @@
           :show-row-totals="false" :show-column-totals="false">
           <DxFieldChooser :enabled="true" :height="400" />
         </DxPivotGrid>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <h2 class="text-xl">Visualisierung</h2>
+        <p>Die Visualisierung ist direkt mit der oben angezeigten Pivot-Tabelle verknüpft. Sie können zudem die
+          Darstellungsmodi wie folgt ändern:</p>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-combobox label="Darstellungsmodus" variant="outlined" :items="vizModes" v-model="vizMode"></v-combobox>
+        <p style="font-size: 9pt; margin-top: -15px;">Bitte beachten Sie: Nicht alle Darstellungsmodi funktionieren für
+          alle Datenkombinationen. Probieren Sie ggf. verschiedene Settings aus.</p>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <DxChart ref="chart">
+          <DxTooltip :enabled="true" :customize-tooltip="customizeTooltip" />
+          <DxAdaptiveLayout :width="450" />
+          <DxSize :height="600" />
+          <DxCommonSeriesSettings :type="vizMode.value" />
+          <DxExport
+            :enabled="true"
+            :printing-enabled="false"
+        />
+        </DxChart>
       </v-col>
     </v-row>
   </div>
@@ -30,18 +76,13 @@ import {
   DxCommonSeriesSettings,
   DxSize,
   DxTooltip,
+  DxExport 
 } from 'devextreme-vue/chart';
 
 import {
   DxPivotGrid,
   DxFieldChooser,
 } from 'devextreme-vue/pivot-grid';
-
-const currencyFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  minimumFractionDigits: 0,
-});
 
 export default {
   created() {
@@ -54,9 +95,24 @@ export default {
     DxTooltip,
     DxPivotGrid,
     DxFieldChooser,
+    DxExport 
   },
   data() {
     return {
+      vizMode: { title: "Balken", value: "bar" },
+      vizModes: [
+        { title: "Balken", value: "bar" },
+        { title: "Linien", value: "line" },
+        { title: "Flächen", value: "area" },
+        { title: "Scatter", value: "scatter" },
+        { title: "Bubble", value: "bubble" },
+        { title: "Balken (gestapelt)", value: "stackedbar" },
+        { title: "Linien (gestapelt)", value: "stackedline" },
+        { title: "Flächen (gestapelt)", value: "stackedarea" },
+        { title: "Balken (auf 100%)", value: "fullstackedbar" },
+        { title: "Linien (auf 100%)", value: "fullstackedline" },
+        { title: "Flächen (auf 100%)", value: "fullstackedarea" },
+      ],
       dataSource: {
         fields: [{
           caption: 'Region',
@@ -77,7 +133,7 @@ export default {
           groupName: 'date',
           groupInterval: 'month',
           visible: true,
-        }, 
+        },
         {
           caption: 'Total',
           dataField: 'amount',
@@ -4578,9 +4634,8 @@ export default {
         ,
       },
       customizeTooltip(args) {
-        const valueText = currencyFormatter.format(args.originalValue);
         return {
-          html: `${args.seriesName} | Total<div class='currency'>${valueText}</div>`,
+          html: `${args.argumentText} / ${args.seriesName}: ${args.originalValue}`,
         };
       },
     };
@@ -4597,6 +4652,11 @@ export default {
       dataSource.expandHeaderItem('row', ['North America']);
       dataSource.expandHeaderItem('column', [2013]);
     }, 0);
+  },
+  computed: {
+    pivotProfiles() {
+      return this.$config.public.pivotProfiles;
+    },
   },
 };
 </script>

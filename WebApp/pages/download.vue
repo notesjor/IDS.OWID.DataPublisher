@@ -2,7 +2,7 @@
     <div>
         <v-row>
             <v-col>
-                <Signin />
+                <Signin @signIn="signIn" />
             </v-col>
         </v-row>
         <v-row>
@@ -20,13 +20,14 @@
             </v-col>
             <v-col>
                 <v-card>
+                    <v-overlay contained v-model="blockDownload" :persistent="true"></v-overlay>
                     <v-card-title>Erweiterter Download</v-card-title>
                     <v-card-text>
                         <p>Mit einer Authentifizierung via KorAP (kostenlose Nutzung für die akademische Forschung) können
                             Sie den vollständigen Datensatz herunterladen. Bitte beachten Sie evtl. beigelegte Lizenz- 
                             oder Nutzungshinweise.</p>
                     </v-card-text>
-                    <v-card-actions><v-btn size="x-large" prepend-icon="mdi-lock-open-outline"
+                    <v-card-actions><v-btn size="x-large" :prepend-icon="blockDownload ? 'mdi-lock' : 'mdi-download-outline'"
                             color="red-accent-4">Download</v-btn></v-card-actions>
                 </v-card>
             </v-col>
@@ -55,9 +56,20 @@ export default {
         Signin,
         Cite,        
     },
+    data() {
+        return {
+            blockDownload: true,
+        }
+    },
     mounted() {
         
     },
+    methods: {
+        signIn() {
+            var self = this;
+            self.$data.blockDownload = false;
+        }
+    }
 }
 </script>
 

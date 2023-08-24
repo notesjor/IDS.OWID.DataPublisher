@@ -42,7 +42,14 @@ export default defineNuxtConfig({
       footerDsgvo: "https://www.owid.de/wb/owid/privacy.html",      
 
       citeText: "Carolin Müller-Spitzer und Jan Oliver Rüdiger (2022): The influence of the corpus on the representation of gender stereotypes in the dictionary. A case study of corpus-based dictionaries of german. In: XX EURALEX Proceedings.",
-      citeBibTeX: "@article{Kohler.2005,\r\n  added-at = {2013-04-27T20:43:19.000+0200},\r\n  author = {K{\"o}hler, Reinhard},\r\n  biburl = {https://www.bibsonomy.org/bibtex/2022b9f8fcbe0a93dfc552648499a9600/},\r\n  interhash = {c308e63d490b0860aa7a18e13ac09e2e},\r\n  intrahash = {022b9f8fcbe0a93dfc552648499a9600},\r\n  journal = {GLDV-Journal for Computational Linguistics and Language Technology},\r\n  keywords = {KI Korpuslinguistik},\r\n  number = 2,\r\n  pages = {1--16},\r\n  timestamp = {2013-04-27T21:03:58.000+0200},\r\n  title = {Korpuslinguistik - zu wissenschaftstheoretischen Grundlagen und methodologischen Perspektiven},\r\n  volume = 20,\r\n  year = 2005\r\n}"
+      citeBibTeX: "@article{Kohler.2005,\r\n  added-at = {2013-04-27T20:43:19.000+0200},\r\n  author = {K{\"o}hler, Reinhard},\r\n  biburl = {https://www.bibsonomy.org/bibtex/2022b9f8fcbe0a93dfc552648499a9600/},\r\n  interhash = {c308e63d490b0860aa7a18e13ac09e2e},\r\n  intrahash = {022b9f8fcbe0a93dfc552648499a9600},\r\n  journal = {GLDV-Journal for Computational Linguistics and Language Technology},\r\n  keywords = {KI Korpuslinguistik},\r\n  number = 2,\r\n  pages = {1--16},\r\n  timestamp = {2013-04-27T21:03:58.000+0200},\r\n  title = {Korpuslinguistik - zu wissenschaftstheoretischen Grundlagen und methodologischen Perspektiven},\r\n  volume = 20,\r\n  year = 2005\r\n}",
+
+      pivotProfiles: [
+        { label: "Erst-/Zweitglied Frequenz", query: "" },
+        { label: "Erst-/Zweitglied Formfrequenz", query: "" },
+        { label: "Jahr/Quelle", query: "" },
+        { label: "Jahr/Land", query: "" },
+      ]
     }
   },
   app: {

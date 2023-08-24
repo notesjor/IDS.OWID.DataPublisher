@@ -16,7 +16,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-chip v-for="profile in pivotProfiles" :key="profile.label" style="margin-right: 10px;">
+        <v-chip v-for="(profile, i) in pivotProfiles" :key="i" style="margin-right: 10px;" @click="setProfile(i)">
           {{ profile.label }}
         </v-chip>
       </v-col>
@@ -24,7 +24,8 @@
     <v-row>
       <v-col>
         <p> Alternativ können Sie aufch auf das Einstellungs-Symbol
-        (<p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
+          (
+        <p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
         oben links in der Pivot-Tabelle klicken und eigene Vergleiche und Fitlerungen vorzunehmen.</p>
       </v-col>
     </v-row>
@@ -125,37 +126,10 @@ export default {
     };
   },
   mounted() {
-    var self = this;
-
     if ((new auth()).isSignedIn)
-      self.signIn();
+      this.signIn();
     else
-      fetch("/schema.json")
-        .then(response => response.json())
-        .then(schema => {
-          fetch("/data.json")
-            .then(response => response.json())
-            .then(data => {
-              self.$data.dataSource = {
-                fields: schema,
-                store: data
-              };
-
-              const pivotGrid = self.$refs.grid.instance;
-              const chart = self.$refs.chart.instance;
-              pivotGrid.bindChart(chart, {
-                dataFieldsDisplayMode: 'splitPanes',
-                alternateDataFields: false,
-              });
-              const dataSource = pivotGrid.getDataSource();
-              setTimeout(() => {
-                dataSource.expandHeaderItem('row', ['North America']);
-                dataSource.expandHeaderItem('column', [2013]);
-              }, 0);
-            });
-        });
-
-
+      this.loadData("");
   },
   computed: {
     pivotProfiles() {
@@ -163,14 +137,52 @@ export default {
     },
   },
   methods: {
-    signIn() {      
+    signIn() {
+      this.loadData("/" + this.$config.public.dataKey);
+    },
+    setProfile(id) {
       var self = this;
-      var key = self.$config.public.dataKey;      
-      
-      fetch(`/${key}/schema.json`)
+      var query = JSON.parse(this.$config.public.pivotProfiles[id].query);
+
+      var ds = self.$data.dataSource;
+      var fields = ds.fields;
+
+      console.log("original");
+      console.log(fields);
+
+      var tmp = [];
+      query.forEach(q => {
+        for (var i = 0; i < fields.length; i++) {
+          var field = fields[i];
+          if (q.dataField == field.dataField) {
+            tmp.push({...field, ...q});
+            fields.splice(i, 1);
+            break;
+          }
+        }
+      });
+
+      console.log("mod")
+      console.log(tmp);
+      console.log(fields);
+
+      tmp = tmp.concat(fields);
+      ds.fields = tmp;
+
+      console.log("final");
+      console.log(ds);
+
+      self.$data.dataSource = ds;
+    },
+    loadData(basePath) {
+      if (basePath == undefined)
+        basePath = "";
+
+      var self = this;
+      fetch(`${basePath}/schema.json`)
         .then(response => response.json())
         .then(schema => {
-          fetch(`/${key}/data.json`)
+          fetch(`${basePath}/data.json`)
             .then(response => response.json())
             .then(data => {
               self.$data.dataSource = {
@@ -184,11 +196,7 @@ export default {
                 dataFieldsDisplayMode: 'splitPanes',
                 alternateDataFields: false,
               });
-              const dataSource = pivotGrid.getDataSource();
-              setTimeout(() => {
-                dataSource.expandHeaderItem('row', ['North America']);
-                dataSource.expandHeaderItem('column', [2013]);
-              }, 0);
+              self.setProfile(0);
             });
         });
     }

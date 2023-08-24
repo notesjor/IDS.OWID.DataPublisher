@@ -10,12 +10,14 @@
         <h2 class="text-xl">Tabelle</h2>
         <p> Diese Tabellen-Ansicht gibt Ihnen einen direkten Zugriff auf die Daten. Sie können die Tabelle
           durchsuchen/filtern
-          <Hint :tip="tip_filter"/> und gruppieren
-          <Hint :tip="tip_group"/>. Bitte beachten Sie: Die Tabelle zeigt alle Datensätze an - aufgrund der Tabellengröße ist die horizonale und
+          <Hint :tip="tip_filter" /> und gruppieren
+          <Hint :tip="tip_group" />. Bitte beachten Sie: Die Tabelle zeigt alle Datensätze an - aufgrund der Tabellengröße
+          ist die horizonale und
           vertikal Darstellung beschnitten. Sie können mit dem Mausrad horizontal und vertikal scrollen
           <Hint :tip="tip_scroll" />. Außerdem erscheinen Scroll-Leisten, wenn Sie die Maus an den unteren bzw. rechten
-          Rand bewegen. Über das Einstellungs-Symbol (<p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
-          können Sie bestimmen, ob Sie einzelne Spalten ein-/ausblenden möchten.
+          Rand bewegen. Über das Einstellungs-Symbol (
+        <p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
+        können Sie bestimmen, ob Sie einzelne Spalten ein-/ausblenden möchten.
         </p>
       </v-col>
     </v-row>
@@ -76,30 +78,25 @@ export default {
     if ((new auth()).isSignedIn)
       this.signIn();
     else
-      fetch('/schema.json')
-        .then(response => response.json())
-        .then(schema => {
-          this.schema = schema;
-          fetch('/data.json')
-            .then(response => response.json())
-            .then(data => {
-              this.dataSource = {
-                store: data
-              };
-            });
-        });
+      this.loadData();
   },
   methods: {
-    signIn() {
-      var key = this.$config.public.dataKey;
-      fetch(`/${key}/schema.json`)
+    signIn()
+    {
+      this.loadData("/" + this.$config.public.dataKey);
+    },
+    loadData(basePath) {
+      if(basePath == undefined)
+        basePath = "";
+      var self = this;
+      fetch(`${basePath}/schema.json`)
         .then(response => response.json())
         .then(schema => {
-          this.schema = schema;
-          fetch(`/${key}/data.json`)
+          self.schema = schema;
+          fetch(`${basePath}/data.json`)
             .then(response => response.json())
             .then(data => {
-              this.dataSource = {
+              self.dataSource = {
                 store: data
               };
             });

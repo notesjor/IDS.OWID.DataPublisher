@@ -66,31 +66,26 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
       var name = Path.GetFileNameWithoutExtension(_path);
 
       var columns = GetColumns();
-      var copy = _data.Select(x => x.ToDictionary(y => columns[y.Key], y => y.Value)).ToArray();
+      var privateData = _data.Select(x => x.ToDictionary(y => columns[y.Key], y => y.Value)).ToArray();
 
       var secDir = Path.Combine(path, datakey.Text);
       if (!Directory.Exists(secDir))
         Directory.CreateDirectory(secDir);
 
-      File.WriteAllText(Path.Combine(secDir, "data.json"), JsonConvert.SerializeObject(copy));
-      GetSchema(columns, copy.First(), out var schemaGrid, out var schemaPivot);
-      File.WriteAllText(Path.Combine(secDir, "grid.schema"), JsonConvert.SerializeObject(schemaGrid));
-      File.WriteAllText(Path.Combine(secDir, "pivot.schema"), JsonConvert.SerializeObject(schemaPivot));
+      File.WriteAllText(Path.Combine(secDir, "data.json"), JsonConvert.SerializeObject(privateData));
+      File.WriteAllText(Path.Combine(secDir, "schema.json"), JsonConvert.SerializeObject(GetSchema(columns, privateData.First())));
 
       var hideKeys = new HashSet<string>(list.Items.Where(x => x.CheckState == Telerik.WinControls.Enumerations.ToggleState.On).Select(x => x.Text));
+      var publicData = _data.Select(x => x.Where(y => !hideKeys.Contains(y.Key)).ToDictionary(y => columns[y.Key], y => y.Value)).ToArray();
 
-      copy = _data.Select(x => x.Where(y => !hideKeys.Contains(y.Key)).ToDictionary(y => columns[y.Key], y => y.Value)).ToArray();
-      File.WriteAllText(Path.Combine(path, "public.json"), JsonConvert.SerializeObject(copy));
-      GetSchema(columns, copy.First(), out var schemaGridPublic, out var schemaPivotPublic);
-      File.WriteAllText(Path.Combine(path, "grid.schema"), JsonConvert.SerializeObject(schemaGridPublic));
-      File.WriteAllText(Path.Combine(path, "pivot.schema"), JsonConvert.SerializeObject(schemaPivotPublic));
+      File.WriteAllText(Path.Combine(path, "data.json"), JsonConvert.SerializeObject(publicData));
+      File.WriteAllText(Path.Combine(path, "schema.json"), JsonConvert.SerializeObject(GetSchema(columns, publicData.First())));
       Close();
     }
 
-    private void GetSchema(Dictionary<string, string> columns, Dictionary<string, object> sample, out Dictionary<string, string>[] schemaGrid, out Dictionary<string, string>[] schemaPivot)
+    private Dictionary<string, string>[] GetSchema(Dictionary<string, string> columns, Dictionary<string, object> sample)
     {
-      var resGrid = new List<Dictionary<string, string>>();
-      var resPivot = new List<Dictionary<string, string>>();
+      var res = new List<Dictionary<string, string>>();
 
       foreach (var item in columns)
       {
@@ -104,27 +99,20 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
         };
 
         if (type == typeof(int))
-          obj.Add("type", "number");
+          obj.Add("dataType", "number");
         else if (type == typeof(double))
-          obj.Add("type", "number");
+          obj.Add("dataType", "number");
         else if (type == typeof(DateTime))
-          obj.Add("type", "date");
+          obj.Add("dataType", "date");
         else
-          obj.Add("type", "string");
+          obj.Add("dataType", "string");
 
-        var tmpGrid = obj.ToDictionary(x => x.Key, x => x.Value);
-        tmpGrid.Add("field", name);
-        tmpGrid.Add("headerText", item.Key);
-        resGrid.Add(tmpGrid);
-
-        var tmpPivot = obj.ToDictionary(x => x.Key, x => x.Value);
-        tmpPivot.Add("name", name);
-        tmpPivot.Add("caption", item.Key);
-        resPivot.Add(tmpPivot);
+        obj.Add("dataField", name);
+        obj.Add("caption", item.Key);
+        res.Add(obj);
       }
 
-      schemaGrid = resGrid.ToArray();
-      schemaPivot = resPivot.ToArray();
+      return res.ToArray();
     }
 
     private Dictionary<string, string> GetColumns()

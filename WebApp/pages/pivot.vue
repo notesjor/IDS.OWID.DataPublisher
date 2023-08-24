@@ -23,8 +23,8 @@
     </v-row>
     <v-row>
       <v-col>
-        <p> Alternativ können Sie aufch auf das Einstellungs-Symbol (
-        <p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
+        <p> Alternativ können Sie aufch auf das Einstellungs-Symbol
+        (<p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
         oben links in der Pivot-Tabelle klicken und eigene Vergleiche und Fitlerungen vorzunehmen.</p>
       </v-col>
     </v-row>
@@ -80,7 +80,7 @@ import {
 
 import {
   DxPivotGrid,
-  DxFieldChooser,
+  DxFieldChooser
 } from 'devextreme-vue/pivot-grid';
 
 export default {

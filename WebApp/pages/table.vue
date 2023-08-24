@@ -10,12 +10,12 @@
         <h2 class="text-xl">Tabelle</h2>
         <p> Diese Tabellen-Ansicht gibt Ihnen einen direkten Zugriff auf die Daten. Sie können die Tabelle
           durchsuchen/filtern
-          <Hint :tip="tip_filter" /> und gruppieren
-          <Hint :tip="tip_group" />.
-          Bitte beachten Sie: Die Tabelle zeigt alle Datensätze an - aufgrund der Tabellengröße ist die horizonale und
+          <Hint :tip="tip_filter"/> und gruppieren
+          <Hint :tip="tip_group"/>. Bitte beachten Sie: Die Tabelle zeigt alle Datensätze an - aufgrund der Tabellengröße ist die horizonale und
           vertikal Darstellung beschnitten. Sie können mit dem Mausrad horizontal und vertikal scrollen
           <Hint :tip="tip_scroll" />. Außerdem erscheinen Scroll-Leisten, wenn Sie die Maus an den unteren bzw. rechten
-          Rand bewegen.
+          Rand bewegen. Über das Einstellungs-Symbol (<p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
+          können Sie bestimmen, ob Sie einzelne Spalten ein-/ausblenden möchten.
         </p>
       </v-col>
     </v-row>
@@ -23,8 +23,11 @@
       <v-col>
         <DxDataGrid id="grid" ref="grid" :data-source="dataSource" :column-auto-width="true" :allow-column-resizing="true"
           :allow-column-reordering="true" height="600">
+
+          <DxColumn v-for="c in schema" :key="c" :data-field="c.dataField" :caption="c.caption" :allow-fixing="true"
+            :alignment="c.align == undefined ? 'left' : c.align" />
+
           <DxFilterRow :visible="true" />
-          <DxColumn v-for="c in schema" :key="c" :data-field="c.dataField" :caption="c.caption" :allow-fixing="true" />
           <DxColumnChooser :enabled="true" mode="select" />
           <DxSorting mode="multiple" />
           <DxScrolling mode="virtual" />
@@ -106,7 +109,9 @@ export default {
 };
 </script>
 
-<style scoped>.dx-scrollable-scroll {
+<style scoped>
+.dx-scrollable-scroll {
   visibility: visible !important;
 
-}</style>
+}
+</style>

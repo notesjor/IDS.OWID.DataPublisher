@@ -14,21 +14,28 @@
                             Informationen entfernt, die Rechte Dritter berühren oder berühren könnten (z. B. Lizenz- oder
                             Datenschutzrechte). </p>
                     </v-card-text>
-                    <v-card-actions><v-btn size="x-large" prepend-icon="mdi-download-outline"
-                            color="green-accent-4">Download</v-btn></v-card-actions>
+                    <v-card-actions>
+                        <v-btn size="x-large" prepend-icon="mdi-download-outline" color="green-accent-4"
+                            @click="download_public">
+                            Download
+                        </v-btn>
+                    </v-card-actions>
                 </v-card>
             </v-col>
             <v-col>
-                <v-card>
-                    <v-overlay contained v-model="blockDownload" :persistent="true"></v-overlay>
+                <v-card :disabled="blockDownload">
                     <v-card-title>Erweiterter Download</v-card-title>
                     <v-card-text>
                         <p>Mit einer Authentifizierung via KorAP (kostenlose Nutzung für die akademische Forschung) können
-                            Sie den vollständigen Datensatz herunterladen. Bitte beachten Sie evtl. beigelegte Lizenz- 
+                            Sie den vollständigen Datensatz herunterladen. Bitte beachten Sie evtl. beigelegte Lizenz-
                             oder Nutzungshinweise.</p>
                     </v-card-text>
-                    <v-card-actions><v-btn size="x-large" :prepend-icon="blockDownload ? 'mdi-lock' : 'mdi-download-outline'"
-                            color="red-accent-4">Download</v-btn></v-card-actions>
+                    <v-card-actions>
+                        <v-btn size="x-large" :prepend-icon="blockDownload ? 'mdi-lock' : 'mdi-download-outline'"
+                            color="red-accent-4" @click="download_secure">
+                            Download
+                        </v-btn>
+                    </v-card-actions>
                 </v-card>
             </v-col>
         </v-row>
@@ -43,7 +50,7 @@
                 <Cite />
             </v-col>
         </v-row>
-        
+
     </div>
 </template>
 
@@ -54,7 +61,7 @@ import Cite from '@/components/cite.vue'
 export default {
     components: {
         Signin,
-        Cite,        
+        Cite,
     },
     data() {
         return {
@@ -62,12 +69,18 @@ export default {
         }
     },
     mounted() {
-        
+
     },
     methods: {
         signIn() {
             var self = this;
             self.$data.blockDownload = false;
+        },
+        download_public() {
+            window.open('/download.zip', '_self');
+        },
+        download_secure() {
+            window.open(`/${this.$config.public.dataKey}/download.zip`, '_self');
         }
     }
 }

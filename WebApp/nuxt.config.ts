@@ -45,10 +45,9 @@ export default defineNuxtConfig({
       citeBibTeX: "@article{Kohler.2005,\r\n  added-at = {2013-04-27T20:43:19.000+0200},\r\n  author = {K{\"o}hler, Reinhard},\r\n  biburl = {https://www.bibsonomy.org/bibtex/2022b9f8fcbe0a93dfc552648499a9600/},\r\n  interhash = {c308e63d490b0860aa7a18e13ac09e2e},\r\n  intrahash = {022b9f8fcbe0a93dfc552648499a9600},\r\n  journal = {GLDV-Journal for Computational Linguistics and Language Technology},\r\n  keywords = {KI Korpuslinguistik},\r\n  number = 2,\r\n  pages = {1--16},\r\n  timestamp = {2013-04-27T21:03:58.000+0200},\r\n  title = {Korpuslinguistik - zu wissenschaftstheoretischen Grundlagen und methodologischen Perspektiven},\r\n  volume = 20,\r\n  year = 2005\r\n}",
 
       pivotProfiles: [
-        { label: "Land+Medium/Jahr", query: "[{\"dataField\":\"c01\",\"area\":\"data\",\"summaryType\":\"count\"},{\"dataField\":\"c19\",\"area\":\"column\"},{\"dataField\":\"c20\",\"area\":\"row\"},{\"dataField\":\"c18\",\"area\":\"row\"}]" },
-        { label: "Erstglied/Medium", query: "[{\"dataField\":\"c01\",\"area\":\"data\",\"summaryType\":\"count\"},{\"dataField\":\"c17\",\"area\":\"row\"},{\"dataField\":\"c18\",\"area\":\"column\"}]" },
-        { label: "Erst-/Zweitglied Formfrequenz", query: "" },        
-        { label: "Jahr/Land", query: "" },
+        { label:"Land+Medium/Jahr","query":[{"dataField":"c19","area":"column"},{"dataField":"c20","area":"row"},{"dataField":"c18","area":"row"},{"dataField":"c01","area":"data","summaryType":"count"}]},
+        { label:"Land/Jahr","query":[{"dataField":"c19","area":"column"},{"dataField":"c20","area":"row"},{"dataField":"c01","area":"data","summaryType":"count"}]},
+        { label:"Medium/Jahr","query":[{"dataField":"c19","area":"column"},{"dataField":"c18","area":"row"},{"dataField":"c01","area":"data","summaryType":"count"}]},
       ]
     }
   },

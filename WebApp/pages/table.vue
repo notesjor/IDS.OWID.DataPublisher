@@ -10,8 +10,8 @@
         <h2 class="text-xl">Tabelle</h2>
         <p> Diese Tabellen-Ansicht gibt Ihnen einen direkten Zugriff auf die Daten. Sie können die Tabelle
           durchsuchen/filtern
-          <Hint :tip="tip_filter" /> und gruppieren
-          <Hint :tip="tip_group" />. Bitte beachten Sie: Die Tabelle zeigt alle Datensätze an - aufgrund der Tabellengröße
+          <Hint :tip="tip_filter"></Hint> und gruppieren
+          <Hint :tip="tip_group"></Hint>. Bitte beachten Sie: Die Tabelle zeigt alle Datensätze an - aufgrund der Tabellengröße
           ist die horizonale und
           vertikal Darstellung beschnitten. Sie können mit dem Mausrad horizontal und vertikal scrollen
           <Hint :tip="tip_scroll" />. Außerdem erscheinen Scroll-Leisten, wenn Sie die Maus an den unteren bzw. rechten

@@ -112,6 +112,7 @@ export default {
         { title: "Linien (auf 100%)", value: "fullstackedline" },
         { title: "Flächen (auf 100%)", value: "fullstackedarea" },
       ],
+      fieldsOriginal: [],
       dataSource: {
         fields: [],
         store: []
@@ -141,13 +142,10 @@ export default {
     },
     setProfile(id) {
       var self = this;
-      var query = JSON.parse(this.$config.public.pivotProfiles[id].query);
+      var query = this.$config.public.pivotProfiles[id].query;
 
       var ds = self.$data.dataSource;
-      var fields = ds.fields;
-
-      console.log("original");
-      console.log(fields);
+      var fields = JSON.parse(JSON.stringify(self.$data.fieldsOriginal));
 
       var tmp = [];
       query.forEach(q => {
@@ -161,17 +159,10 @@ export default {
         }
       });
 
-      console.log("mod")
-      console.log(tmp);
-      console.log(fields);
-
-      tmp = tmp.concat(fields);
-      ds.fields = tmp;
-
-      console.log("final");
-      console.log(ds);
-
-      self.$data.dataSource = ds;
+      self.$data.dataSource = {
+        fields: tmp.concat(fields),
+        store: self.$data.dataSource.store
+      };
     },
     loadData(basePath) {
       if (basePath == undefined)
@@ -184,6 +175,7 @@ export default {
           fetch(`${basePath}/data.json`)
             .then(response => response.json())
             .then(data => {
+              self.$data.fieldsOriginal = schema;
               self.$data.dataSource = {
                 fields: schema,
                 store: data

@@ -10,15 +10,20 @@
         <h2 class="text-xl">Tabelle</h2>
         <p> Diese Tabellen-Ansicht gibt Ihnen einen direkten Zugriff auf die Daten. Sie können die Tabelle
           durchsuchen/filtern
-          <Hint :tip="tip_filter"></Hint> und gruppieren
-          <Hint :tip="tip_group"></Hint>. Bitte beachten Sie: Die Tabelle zeigt alle Datensätze an - aufgrund der Tabellengröße
+          <Hint :tip="tip_filter"></Hint>. Außerdem können Sie eine Gruppierung vornehmen
+          <Hint :tip="tip_group"></Hint>. Bitte beachten Sie: Die Tabelle zeigt alle Datensätze an - aufgrund der
+          Tabellengröße
           ist die horizonale und
           vertikal Darstellung beschnitten. Sie können mit dem Mausrad horizontal und vertikal scrollen
           <Hint :tip="tip_scroll" />. Außerdem erscheinen Scroll-Leisten, wenn Sie die Maus an den unteren bzw. rechten
-          Rand bewegen. Über das Einstellungs-Symbol (
-        <p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
+          Rand bewegen. Über das Einstellungs-Symbol (<p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
         können Sie bestimmen, ob Sie einzelne Spalten ein-/ausblenden möchten.
         </p>
+      </v-col>
+    </v-row>
+    <v-row v-if="showAllBtn">
+      <v-col>
+        <v-btn prepend-icon="mdi-table" @click="showAll">Alle Daten anzeigen</v-btn>
       </v-col>
     </v-row>
     <v-row>
@@ -37,7 +42,7 @@
           <DxGroupPanel :visible="true" />
         </DxDataGrid>
       </v-col>
-    </v-row>
+    </v-row>    
   </div>
 </template>
     
@@ -69,6 +74,7 @@ export default {
       dataSource: {
         store: []
       },
+      showAllBtn: false,
       tip_filter: "Unterhalb jedes Spaltenkopfs finden Sie eine Eingabebox (siehe Lupen-Symbol).<br/>Sie können nach einem Wert suchen, indem Sie diesen Wert in das entsprechende Feld eingeben.<br/>Mit einem Klick auf das Lupen-Symbol können Sie verschiedene Suchoperatoren auswählen.",
       tip_group: "Sie können die Tabelle nach einer Spalte gruppieren, indem Sie die Spalte in den Bereich oberhalb der Tabelle ziehen.<br/>Sie können die Gruppierung aufheben, indem Sie die Spalte aus dem oberen Bereich erneut auf die Tabelle ziehen.",
       tip_scroll: "Fast jede modern Maus verfügt über eine vertikale und horizontale Scroll-Funktion.<br/>Für das vertikale Scrollen tippen Sie ggf. das Mausrat von rechts nach links (bzw. umgekehrt) an."
@@ -81,12 +87,11 @@ export default {
       this.loadData();
   },
   methods: {
-    signIn()
-    {
+    signIn() {
       this.loadData("/" + this.$config.public.dataKey);
     },
     loadData(basePath) {
-      if(basePath == undefined)
+      if (basePath == undefined)
         basePath = "";
       var self = this;
       fetch(`${basePath}/schema.json`)
@@ -99,8 +104,38 @@ export default {
               self.dataSource = {
                 store: data
               };
-            });
+            })
+            .then(() => {
+              self.applyFilter();
+            })
         });
+    },
+    applyFilter() {
+      const queries = new URLSearchParams(window.location.search);
+      var column = "";
+      if (queries.has("column"))
+        column = queries.get("column");
+      var value = "";
+      if (queries.has("value"))
+        value = queries.get("value");
+
+      var dataField = this.schema.find(x => x.caption == column).dataField;
+
+      if (column == "" || value == "")
+        return;
+
+      this.dataSource = {
+        store: this.dataSource.store,
+        filter: [dataField, "=", value]
+      }
+      this.showAllBtn = true;
+    },
+    showAll() {
+      this.dataSource = {
+        store: this.dataSource.store,
+        filter: null
+      }
+      this.showAllBtn = false;
     }
   }
 };

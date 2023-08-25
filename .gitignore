@@ -130,7 +130,7 @@ dist
 .pnp.*
 syncfusion-license.txt
 *.vsidx
-/WebApp/public/public.json
-/WebApp/public/*.schema
-/WebApp/public/*/*.schema
-/WebApp/public/*/data.json
+/WebApp/public/data.*
+/WebApp/public/schema.json
+/WebApp/public/*/data.*
+/WebApp/public/*/schema.json

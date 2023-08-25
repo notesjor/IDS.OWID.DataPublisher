@@ -63,6 +63,26 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap add_circle_outline_24px {
+            get {
+                object obj = ResourceManager.GetObject("add-circle-outline@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap delete_filled_24px {
+            get {
+                object obj = ResourceManager.GetObject("delete-filled@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap folder_open_24px {
             get {
                 object obj = ResourceManager.GetObject("folder-open@24px", resourceCulture);

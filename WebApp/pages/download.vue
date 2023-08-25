@@ -77,10 +77,10 @@ export default {
             self.$data.blockDownload = false;
         },
         download_public() {
-            window.open('/download.zip', '_self');
+            window.open('/data.zip', '_self');
         },
         download_secure() {
-            window.open(`/${this.$config.public.dataKey}/download.zip`, '_self');
+            window.open(`/${this.$config.public.dataKey}/data.zip`, '_self');
         }
     }
 }

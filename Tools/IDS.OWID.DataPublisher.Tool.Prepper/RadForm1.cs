@@ -23,7 +23,6 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
     private List<Dictionary<string, object>> _data;
     private string _license;
     private string _readme;
-    private string _index => drop_index.SelectedItem.Text;
 
     public RadForm1()
     {
@@ -67,6 +66,8 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
 
     private void btn_export_Click(object sender, EventArgs e)
     {
+      Hide();
+
       btn_export.Enabled = false;
       var pubDir = Path.GetDirectoryName(_path);
       var name = Path.GetFileNameWithoutExtension(_path);
@@ -85,10 +86,7 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
       columns = columns.Where(x => !hideKeys.Contains(x.Key)).ToDictionary(x => x.Key, x => x.Value);
 
       WriteData("public", columns, pubDir, publicData);
-      if (chk_index.Checked)
-        WriteIndex(columns, pubDir, publicData);
-
-      Hide();
+      WriteIndex(columns, pubDir, publicData);      
 
       var form = new PivotHelper(columns, pubDir);
       form.ShowDialog();
@@ -96,12 +94,21 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
       Close();
     }
 
-    private void WriteIndex(Dictionary<string, string> columns, string dir, Dictionary<string, object>[] publicData)
+    private void WriteIndex(Dictionary<string, string> columns, string dir, Dictionary<string, object>[] data)
     {
-      var hashset = new HashSet<string>();
-      foreach (var item in publicData)
-        hashset.Add(item[columns[_index]].ToString());
-      File.WriteAllText(Path.Combine(dir, "index.json"), JsonConvert.SerializeObject(hashset));
+      var index = new Dictionary<string, HashSet<string>>();
+      foreach (var x in columns)
+      {
+        var key = x.Value;
+        var val = new HashSet<string>();
+        foreach (var y in data)
+        {
+          if(y.ContainsKey(key))
+            val.Add(y[key]?.ToString());
+        }
+        index.Add(x.Key, val);
+      }
+      File.WriteAllText(Path.Combine(dir, "index.json"), JsonConvert.SerializeObject(index));
     }
 
     private void WriteData(string label, Dictionary<string, string> columns, string dir, Dictionary<string, object>[] data)
@@ -138,7 +145,7 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
       using (var fs = new FileStream(Path.Combine(dir, "data.zip"), FileMode.Create, FileAccess.Write))
       using (var zip = new ZipOutputStream(fs))
       {
-        PutEntry(zip, "data.json", Path.Combine(dir, "data.json"));
+        WriteData_PutJson(zip, dir, columns, data);
         PutEntry(zip, "data.tsv", Path.Combine(dir, "data.tsv"));
         if (!string.IsNullOrEmpty(_readme))
           PutEntry(zip, "README.md", _readme);
@@ -146,6 +153,16 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
           PutEntry(zip, "LICENSE", _license);
       }
       #endregion
+    }
+
+    private void WriteData_PutJson(ZipOutputStream zip, string dir, Dictionary<string, string> columns, Dictionary<string, object>[] data)
+    {
+      var reverse = columns.ToDictionary(x => x.Value, x => x.Key);
+      var resolved = data.Select(x => x.ToDictionary(y => reverse[y.Key], y => y.Value)).ToArray();
+      var temp = Path.Combine(dir, "temp.json");
+      File.WriteAllText(temp, JsonConvert.SerializeObject(resolved));
+      PutEntry(zip, "data.json", temp);
+      File.Delete(temp);
     }
 
     private void PutEntry(ZipOutputStream zip, string label, string path)
@@ -233,16 +250,6 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
 
       _readme = ofd.FileName;
       chk_readme.Checked = true;
-    }
-
-    private void chk_index_ToggleStateChanged(object sender, StateChangedEventArgs args)
-    {
-      drop_index.Enabled = chk_index.Checked;
-
-      drop_index.Items.Clear();
-      foreach (var item in _keys)
-        drop_index.Items.Add(item);
-      drop_index.SelectedIndex = 0;
     }
   }
 }

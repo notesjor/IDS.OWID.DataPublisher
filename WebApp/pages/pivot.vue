@@ -78,6 +78,8 @@ import {
   DxExport
 } from 'devextreme-vue/chart';
 
+import Chart from "devextreme/viz/chart";
+
 import {
   DxPivotGrid,
   DxFieldChooser
@@ -94,7 +96,8 @@ export default {
     DxTooltip,
     DxPivotGrid,
     DxFieldChooser,
-    DxExport
+    DxExport,
+    Chart
   },
   data() {
     return {

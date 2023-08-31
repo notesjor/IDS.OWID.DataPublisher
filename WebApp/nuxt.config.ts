@@ -24,11 +24,6 @@ export default defineNuxtConfig({
       defaultImport: 'url',
     })],
   },
-  nitro: {
-    prerender: {
-      routes: ['/sitemap.xml']
-    }
-  },
   modules: ['@pinia/nuxt', '@nuxt/content'],  
   runtimeConfig: {
     public: {

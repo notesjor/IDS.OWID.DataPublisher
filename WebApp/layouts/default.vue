@@ -21,11 +21,11 @@
 
         <v-divider></v-divider>
 
-        <ContentList path="/page" v-slot="{ list }">
-          <div v-for="x in list" :key="article._path">
-            <nuxt-link :to="x._path"><v-list-item prepend-icon="mdi-table" title="Tabelle"></v-list-item></nuxt-link>
-          </div>
-        </ContentList>
+        <v-list density="compact" nav>
+          <nuxt-link v-for="x in pages" :key="x._path" :to="x._path">
+            <v-list-item :prepend-icon="x.icon" :title="x.title"></v-list-item>
+          </nuxt-link>
+        </v-list>
 
         <v-divider></v-divider>
 
@@ -35,6 +35,15 @@
               title="Pivot-Tabelle"></v-list-item></nuxt-link>
           <nuxt-link to="/download"><v-list-item prepend-icon="mdi-download" title="Download"></v-list-item></nuxt-link>
         </v-list>
+
+        <v-divider></v-divider>
+
+        <v-list density="compact" nav>
+          <nuxt-link v-for="x in infos" :key="x._path" :to="x._path">
+            <v-list-item :prepend-icon="x.icon" :title="x.title"></v-list-item>
+          </nuxt-link>
+        </v-list>
+
       </v-navigation-drawer>
 
       <v-container>
@@ -97,6 +106,9 @@ export default {
       footerContact: null,
       footerImpressum: null,
       footerDsgvo: null,
+
+      pages: [],
+      infos: [],
     }
   },
 
@@ -110,13 +122,15 @@ export default {
     this.footerContact = this.$config.public.footerContact;
     this.footerImpressum = this.$config.public.footerImpressum;
     this.footerDsgvo = this.$config.public.footerDsgvo;
-  },
 
-  methods: {
-    test() {
-      alert("test");
-    }
-  }
+    queryContent("/page").find().then((x) => {
+      this.pages = x;
+    });
+
+    queryContent("/info").find().then((x) => {
+      this.infos = x;
+    });
+  },
 }
 </script>
   

@@ -1,3 +1,8 @@
+---
+title: Startseite
+icon: mdi-home
+---
+
 An h1 header
 ============
 

@@ -24,15 +24,18 @@ export default defineNuxtConfig({
       defaultImport: 'url',
     })],
   },
-  modules: ['@pinia/nuxt'],  
+  nitro: {
+    prerender: {
+      routes: ['/sitemap.xml']
+    }
+  },
+  modules: ['@pinia/nuxt', '@nuxt/content'],  
   runtimeConfig: {
     public: {
       // The tool "IDS.OWID.DataPublisher.Tool.Prepper" generates the dataKey. Please use it here.
       dataKey: "DE81E3A26EC57CE4F8BBA64E2FA71951",
 
       appName: "Empirische Genderlinguistik: Komposita mit Gatte und Gattin",
-      appDescription: "In der Studie werden Komposita mit den relationalen Zweitgliedern Gatte und Gattin aus genderlinguistischer Perspektive untersucht. Obwohl solche Wortbildungen Zugang zu impliziten Versprachlichungen von Geschlechterrelationen bieten, wurden sie in der Genderlinguistik bisher kaum beachtet. Umgekehrt spielen Genus/Sexus in der Kompositumsforschung bisher keine Rolle. Die Untersuchung basiert auf empirischen Analysen von Korpusmaterial aus dem elexiko Korpus. Drei neue Befunde lassen sich ableiten: 1) Das Zweitglied ist ausschlaggebend für die Bedeutungsrelation (Gattin = possessiv; Gatte = qualifizierend); 2) Genusgleichheit bzw. -divergenz der Konstituenten sind ausschlaggebend für die Kompositumsbedeutung; 3) Movierte Erstglieder sind die häufigste Form zur Referenz auf spezifische weibliche Einzelpersonen. Bei weiblichen Referentinnen herrscht insgesamt aber eine große Formenvariation – im Gegensatz zu männlichen Referenten, die fast ausschließlich mit maskulinen Erstgliedern versprachlicht werden.",
-      appKeywords: ["Komposition", "Genderlinguistik", "Geschlecht", "Movierung", "Bedeutungsrelation", "Referenz", "Korpus"],
 
       leftIconHref: "https://www.owid.de/plus/index.html",
       rightIconHref: "https://www.ids-mannheim.de/",

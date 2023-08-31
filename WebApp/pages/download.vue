@@ -39,18 +39,6 @@
                 </v-card>
             </v-col>
         </v-row>
-        <v-row>
-            <v-col>
-                <br>
-                <hr />
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col>
-                <Cite />
-            </v-col>
-        </v-row>
-
     </div>
 </template>
 

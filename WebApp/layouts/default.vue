@@ -21,15 +21,44 @@
 
         <v-divider></v-divider>
 
-        <v-list density="compact" nav>          
+        <ContentList path="/page" v-slot="{ list }">
+          <div v-for="x in list" :key="article._path">
+            <nuxt-link :to="x._path"><v-list-item prepend-icon="mdi-table" title="Tabelle"></v-list-item></nuxt-link>
+          </div>
+        </ContentList>
+
+        <v-divider></v-divider>
+
+        <v-list density="compact" nav>
           <nuxt-link to="/table"><v-list-item prepend-icon="mdi-table" title="Tabelle"></v-list-item></nuxt-link>
-          <nuxt-link to="/pivot"><v-list-item prepend-icon="mdi-table-pivot" title="Pivot-Tabelle"></v-list-item></nuxt-link>
+          <nuxt-link to="/pivot"><v-list-item prepend-icon="mdi-table-pivot"
+              title="Pivot-Tabelle"></v-list-item></nuxt-link>
           <nuxt-link to="/download"><v-list-item prepend-icon="mdi-download" title="Download"></v-list-item></nuxt-link>
         </v-list>
       </v-navigation-drawer>
 
       <v-container>
+        <v-row>
+          <v-col>
+            <div>
+              <h1 class="text-3xl font-bold">
+                {{ appName }}
+              </h1>
+            </div>
+          </v-col>
+        </v-row>
         <slot />
+        <v-row>
+          <v-col>
+            <br>
+            <hr />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <Cite />
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
 

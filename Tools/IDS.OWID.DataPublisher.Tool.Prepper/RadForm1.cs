@@ -23,6 +23,12 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
     private List<Dictionary<string, object>> _data;
     private string _license;
     private string _readme;
+    private JsonSerializerSettings _options = new JsonSerializerSettings
+    {
+      NullValueHandling = NullValueHandling.Ignore,
+      DefaultValueHandling = DefaultValueHandling.Ignore,
+      Formatting = Formatting.Indented
+    };
 
     public RadForm1()
     {
@@ -86,7 +92,7 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
       columns = columns.Where(x => !hideKeys.Contains(x.Key)).ToDictionary(x => x.Key, x => x.Value);
 
       WriteData("public", columns, pubDir, publicData);
-      WriteIndex(columns, pubDir, publicData);      
+      WriteIndex(columns, pubDir, publicData);
 
       var form = new PivotHelper(columns, pubDir);
       form.ShowDialog();
@@ -103,7 +109,7 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
         var val = new HashSet<string>();
         foreach (var y in data)
         {
-          if(y.ContainsKey(key))
+          if (y.ContainsKey(key))
             val.Add(y[key]?.ToString());
         }
         index.Add(x.Key, val);
@@ -113,8 +119,8 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
 
     private void WriteData(string label, Dictionary<string, string> columns, string dir, Dictionary<string, object>[] data)
     {
-      File.WriteAllText(Path.Combine(dir, "data.json"), JsonConvert.SerializeObject(data));
-      File.WriteAllText(Path.Combine(dir, "schema.json"), JsonConvert.SerializeObject(GetSchema(columns, data.First())));
+      File.WriteAllText(Path.Combine(dir, "data.json"), JsonConvert.SerializeObject(data, _options));
+      File.WriteAllText(Path.Combine(dir, "schema.json"), JsonConvert.SerializeObject(GetSchema(columns, data)));
 
       #region CSV
       var config = new CsvHelper.Configuration.CsvConfiguration(CultureInfo.InvariantCulture)
@@ -160,7 +166,7 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
       var reverse = columns.ToDictionary(x => x.Value, x => x.Key);
       var resolved = data.Select(x => x.ToDictionary(y => reverse[y.Key], y => y.Value)).ToArray();
       var temp = Path.Combine(dir, "temp.json");
-      File.WriteAllText(temp, JsonConvert.SerializeObject(resolved));
+      File.WriteAllText(temp, JsonConvert.SerializeObject(resolved, _options));
       PutEntry(zip, "data.json", temp);
       File.Delete(temp);
     }
@@ -180,36 +186,40 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
       }
     }
 
-    private Dictionary<string, string>[] GetSchema(Dictionary<string, string> columns, Dictionary<string, object> sample)
+    private Dictionary<string, string>[] GetSchema(Dictionary<string, string> columns, Dictionary<string, object>[] data)
     {
-      var res = new List<Dictionary<string, string>>();
+      var res = new Dictionary<string, Dictionary<string, string>>();
 
-      foreach (var x in sample)
-      {
-        var name = x.Key;
-        var type = x.Value?.GetType();
+      foreach (var sample in data)
+        foreach (var x in sample)
+        {
+          var name = x.Key;
+          if (res.ContainsKey(name))
+            continue;
 
-        var obj = new Dictionary<string, string>{
+          var type = x.Value?.GetType();
+
+          var obj = new Dictionary<string, string>{
           { "allowFiltering", "true" },
           { "allowSorting", "true" },
           { "allowSortingBySummary", "true" }
         };
 
-        if (type == typeof(int))
-          obj.Add("dataType", "number");
-        else if (type == typeof(double))
-          obj.Add("dataType", "number");
-        else if (type == typeof(DateTime))
-          obj.Add("dataType", "date");
-        else
-          obj.Add("dataType", "string");
+          if (type == typeof(int))
+            obj.Add("dataType", "number");
+          else if (type == typeof(double))
+            obj.Add("dataType", "number");
+          else if (type == typeof(DateTime))
+            obj.Add("dataType", "date");
+          else
+            obj.Add("dataType", "string");
 
-        obj.Add("dataField", name);
-        obj.Add("caption", columns.First(x => x.Value == name).Key);
-        res.Add(obj);
-      }
+          obj.Add("dataField", name);
+          obj.Add("caption", columns.First(x => x.Value == name).Key);
+          res.Add(name, obj);
+        }
 
-      return res.ToArray();
+      return res.Values.ToArray();
     }
 
     private Dictionary<string, string> GetColumns()

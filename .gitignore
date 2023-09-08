@@ -134,3 +134,4 @@ syncfusion-license.txt
 /WebApp/public/schema.json
 /WebApp/public/*/data.*
 /WebApp/public/*/schema.json
+/WebApp/public/index.json

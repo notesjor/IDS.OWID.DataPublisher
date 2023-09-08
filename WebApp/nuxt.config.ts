@@ -48,6 +48,6 @@ export default defineNuxtConfig({
     }
   },
   app: {
-    baseURL: "/"
+    baseURL: "/BAB34D771"
   }
 })

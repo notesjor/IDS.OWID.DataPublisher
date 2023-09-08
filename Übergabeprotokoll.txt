@@ -1,0 +1,52 @@
+### Datenübergabeprotokoll für Datapublisher ###
+
+# Projektname
+Empirische Genderlinguistik: Komposita mit Gatte und Gattin
+
+# E-Mail Kontaktperson
+mailto:ruediger@ids-mannheim.de
+
+# Änderungswünsche Logos (Standard: Links = OWID / Rechts = IDS)
+Keine
+
+# Änderungswünsche Footer-Links (Betrifft: Impressum / Datenschutzhinweis)
+Keine
+
+# Zitation (Volltext)
+Carolin Müller-Spitzer und Jan Oliver Rüdiger (2022): The influence of the corpus on the representation of gender stereotypes in the dictionary. A case study of corpus-based dictionaries of german. In: XX EURALEX Proceedings.
+
+# Zitation (BibTeX)
+@article{Kohler.2005,
+  added-at = {2013-04-27T20:43:19.000+0200},
+  author = {K{\"o}hler, Reinhard},
+  biburl = {https://www.bibsonomy.org/bibtex/2022b9f8fcbe0a93dfc552648499a9600/},
+  interhash = {c308e63d490b0860aa7a18e13ac09e2e},
+  intrahash = {022b9f8fcbe0a93dfc552648499a9600},
+  journal = {GLDV-Journal for Computational Linguistics and Language Technology},
+  keywords = {KI Korpuslinguistik},
+  number = 2,\r\n  pages = {1--16},
+  timestamp = {2013-04-27T21:03:58.000+0200},
+  title = {Korpuslinguistik - zu wissenschaftstheoretischen Grundlagen und methodologischen Perspektiven},
+  volume = 20,
+  year = 2005
+}
+
+# Datenschnitte (PIVOT)
+Entweder mit Editor oder nach folgendem Schema
+Titel: Generisches Maskulinum nach Verlag
+X-Achse: gen_mask
+Y-Achse: Verlag
+VALUE: sigle
+METHOD: count
+
+# Kurzbeschreibung (README) - FORMAT: Markdown (wird beigelegt und ist auf Startseite sichtbar).
+---
+
+# Lizenz - FORMAT: Markdown
+---
+
+# Weitere Seiten (zwischen Startseite und Analysen) - Pro Seite eine Markdown-Datei - Bitte hier Seiten auflisten
+Keine
+
+# Weitere Seiten (nach Analysen) - Pro Seite eine Markdown-Datei - Bitte hier Seiten auflisten
+Keine

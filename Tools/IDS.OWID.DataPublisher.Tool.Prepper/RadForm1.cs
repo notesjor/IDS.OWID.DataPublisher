@@ -135,7 +135,7 @@ namespace IDS.OWID.DataPublisher.Tool.Prepper
         foreach (var item in data)
         {
           foreach (var c in columns)
-            csv.WriteField(item[c.Value]);
+            csv.WriteField(item.ContainsKey(c.Value) ? item[c.Value] : null);
           csv.NextRecord();
         }
       }

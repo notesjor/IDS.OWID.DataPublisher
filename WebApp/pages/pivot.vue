@@ -147,7 +147,6 @@ export default {
       var self = this;
       var query = this.$config.public.pivotProfiles[id].query;
 
-      var ds = self.$data.dataSource;
       var fields = JSON.parse(JSON.stringify(self.$data.fieldsOriginal));
 
       var tmp = [];

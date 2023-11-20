@@ -22,9 +22,7 @@
         <v-divider></v-divider>
 
         <v-list density="compact" nav>
-          <nuxt-link v-for="x in pages" :key="x._path" :to="x._path">
-            <v-list-item :prepend-icon="x.icon" :title="x.title"></v-list-item>
-          </nuxt-link>
+          <nuxt-link to="/info"><v-list-item prepend-icon="mdi-book-open-page-variant" title="Spaltennamen"></v-list-item></nuxt-link>
         </v-list>
 
         <v-divider></v-divider>
@@ -56,18 +54,7 @@
             </div>
           </v-col>
         </v-row>
-        <slot />
-        <v-row>
-          <v-col>
-            <br>
-            <hr />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <Cite />
-          </v-col>
-        </v-row>
+        <slot />        
       </v-container>
     </v-main>
 

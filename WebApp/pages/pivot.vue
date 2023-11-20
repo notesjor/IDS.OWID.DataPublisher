@@ -24,7 +24,8 @@
     <v-row>
       <v-col>
         <p> Alternativ können Sie aufch auf das Einstellungs-Symbol
-          (<p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
+          (
+        <p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
         oben links in der Pivot-Tabelle klicken und eigene Vergleiche und Fitlerungen vorzunehmen.</p>
       </v-col>
     </v-row>
@@ -60,6 +61,17 @@
           <DxCommonSeriesSettings :type="vizMode.value" />
           <DxExport :enabled="true" :printing-enabled="false" />
         </DxChart>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <br>
+        <hr />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <Cite />
       </v-col>
     </v-row>
   </div>
@@ -141,7 +153,7 @@ export default {
   },
   methods: {
     signIn() {
-      this.loadData("/" + this.$config.public.dataKey);
+      this.loadData(this.$config.public.dataKey);
     },
     setProfile(id) {
       var self = this;
@@ -154,7 +166,7 @@ export default {
         for (var i = 0; i < fields.length; i++) {
           var field = fields[i];
           if (q.dataField == field.dataField) {
-            tmp.push({...field, ...q});
+            tmp.push({ ...field, ...q });
             fields.splice(i, 1);
             break;
           }
@@ -171,10 +183,12 @@ export default {
         basePath = "";
 
       var self = this;
-      fetch(`${basePath}/schema.json`)
+      var appURL = this.$config.public.appURL;
+
+      fetch(`${appURL}/${basePath}/schema.json`)
         .then(response => response.json())
         .then(schema => {
-          fetch(`${basePath}/data.json`)
+          fetch(`${appURL}/${basePath}/data.json`)
             .then(response => response.json())
             .then(data => {
               self.$data.fieldsOriginal = schema;

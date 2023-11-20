@@ -29,9 +29,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       // The tool "IDS.OWID.DataPublisher.Tool.Prepper" generates the dataKey. Please use it here.
-      dataKey: "BAB34D77121580AF397F9D04AE4F0EB0",
+      dataKey: "DATA_KEY",
 
-      appName: "Empirische Genderlinguistik: Komposita mit Gatte und Gattin",
+      appName: "Komposita mit Gatte und Gattin",
 
       leftIconHref: "https://www.owid.de/plus/index.html",
       rightIconHref: "https://www.ids-mannheim.de/",
@@ -40,14 +40,97 @@ export default defineNuxtConfig({
       footerImpressum: "https://www.owid.de/wb/owid/impressum.html",
       footerDsgvo: "https://www.owid.de/wb/owid/privacy.html",      
 
-      citeText: "Carolin Müller-Spitzer und Jan Oliver Rüdiger (2022): The influence of the corpus on the representation of gender stereotypes in the dictionary. A case study of corpus-based dictionaries of german. In: XX EURALEX Proceedings.",
-      citeBibTeX: "@article{Kohler.2005,\r\n  added-at = {2013-04-27T20:43:19.000+0200},\r\n  author = {K{\"o}hler, Reinhard},\r\n  biburl = {https://www.bibsonomy.org/bibtex/2022b9f8fcbe0a93dfc552648499a9600/},\r\n  interhash = {c308e63d490b0860aa7a18e13ac09e2e},\r\n  intrahash = {022b9f8fcbe0a93dfc552648499a9600},\r\n  journal = {GLDV-Journal for Computational Linguistics and Language Technology},\r\n  keywords = {KI Korpuslinguistik},\r\n  number = 2,\r\n  pages = {1--16},\r\n  timestamp = {2013-04-27T21:03:58.000+0200},\r\n  title = {Korpuslinguistik - zu wissenschaftstheoretischen Grundlagen und methodologischen Perspektiven},\r\n  volume = 20,\r\n  year = 2005\r\n}",
+      citeText: "Ochs, Samira (2024): Komposita mit den relationalen Zweitgliedern *Gatte* und *Gattin* – eine korpusbasierte Studie aus genderlinguistischer Perspektive. Zeitschrift für Wortbildung / Journal of Word Formation",
+      citeBibTeX: "@article{Ochs.2024,\r\n  author = {Ochs, Samira},\r\n  journal = {Zeitschrift für Wortbildung / Journal of Word Formation},\r\n  keywords = {Komposition Genderlinguistik Geschlecht Movierung Bedeutungsrelation Referenz Korpus},\r\n  number = 1,\r\n  pages = {},\r\n  title = {Komposita mit den relationalen Zweitgliedern Gatte und Gattin – eine korpusbasierte Studie aus genderlinguistischer Perspektive},\r\n  volume = 1,\r\n  year = 2024\r\n}",
 
       pivotProfiles: 
-      [{"label":"A/B-Vergleich: Linguistische Klasse","query":[{"dataField":"c07","area":"column"},{"dataField":"c08","area":"row"},{"dataField":"c00","area":"data","summaryType":"count"}]},{"label":"A/B-Vergleich: Generisches Maskulinum","query":[{"dataField":"c31","area":"column"},{"dataField":"c32","area":"row"},{"dataField":"c00","area":"data","summaryType":"count"}]},{"label":"A/B-Vergleich: Konkrete Referenz","query":[{"dataField":"c39","area":"column"},{"dataField":"c40","area":"row"},{"dataField":"c00","area":"data","summaryType":"count"}]}]
-    }
+      [
+        {
+          "label": "Zweitglied_Form vs. Bedeutungsrelation",
+          "query": [
+            {
+              "dataField": "c07",
+              "area": "column"
+            },
+            {
+              "dataField": "c11",
+              "area": "row"
+            },
+            {
+              "dataField": "c01",
+              "area": "data",
+              "summaryType": "count",
+              "dataType": "number"
+            }
+          ]
+        },
+        {
+          "label": "Erstglied_Form vs. Erstglied_Ref_Gender",
+          "query": [
+            {
+              "dataField": "c03",
+              "area": "column"
+            },
+            {
+              "dataField": "c05",
+              "area": "row"
+            },
+            {
+              "dataField": "c01",
+              "area": "data",
+              "summaryType": "count",
+              "dataType": "number"
+            }
+          ]
+        },
+        {
+          "label": "Genusgleichheit_Kompositumsglieder vs. Bedeutungsrelation",
+          "query": [
+            {
+              "dataField": "c14",
+              "area": "column"
+            },
+            {
+              "dataField": "c11",
+              "area": "row"
+            },
+            {
+              "dataField": "c01",
+              "area": "data",
+              "summaryType": "count",
+              "dataType": "number"
+            }
+          ]
+        },
+        {
+          "label": "Land und Medium vs. Jahr",
+          "query": [
+            {
+              "dataField": "c19",
+              "area": "column"
+            },
+            {
+              "dataField": "c17",
+              "area": "column"
+            },
+            {
+              "dataField": "c18",
+              "area": "row"
+            },
+            {
+              "dataField": "c01",
+              "area": "data",
+              "summaryType": "count",
+              "dataType": "number"
+            }
+          ]
+        }
+      ],
+
+      appURL: "https://www.owid.de/plus/gattin2023" // muss an app.baseURL angeglichen werden
+    },    
   },
   app: {
-    baseURL: "/BAB34D771"
+    baseURL: "/plus/gattin2023" // muss an runtimeConfig.appURL angeglichen werden
   }
 })

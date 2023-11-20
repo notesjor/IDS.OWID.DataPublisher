@@ -16,7 +16,8 @@
           ist die horizonale und
           vertikal Darstellung beschnitten. Sie können mit dem Mausrad horizontal und vertikal scrollen
           <Hint :tip="tip_scroll" />. Außerdem erscheinen Scroll-Leisten, wenn Sie die Maus an den unteren bzw. rechten
-          Rand bewegen. Über das Einstellungs-Symbol (<p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
+          Rand bewegen. Über das Einstellungs-Symbol (
+        <p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
         können Sie bestimmen, ob Sie einzelne Spalten ein-/ausblenden möchten.
         </p>
       </v-col>
@@ -42,7 +43,18 @@
           <DxGroupPanel :visible="true" />
         </DxDataGrid>
       </v-col>
-    </v-row>    
+    </v-row>
+    <v-row>
+      <v-col>
+        <br>
+        <hr />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <Cite />
+      </v-col>
+    </v-row>
   </div>
 </template>
     
@@ -88,17 +100,20 @@ export default {
   },
   methods: {
     signIn() {
-      this.loadData("/" + this.$config.public.dataKey);
+      this.loadData(this.$config.public.dataKey);
     },
     loadData(basePath) {
       if (basePath == undefined)
         basePath = "";
+
       var self = this;
-      fetch(`${basePath}/schema.json`)
+      var appURL = this.$config.public.appURL;
+
+      fetch(`${appURL}/${basePath}/schema.json`)
         .then(response => response.json())
         .then(schema => {
           self.schema = schema;
-          fetch(`${basePath}/data.json`)
+          fetch(`${appURL}/${basePath}/data.json`)
             .then(response => response.json())
             .then(data => {
               self.dataSource = {

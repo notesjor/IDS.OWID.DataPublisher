@@ -39,6 +39,17 @@
                 </v-card>
             </v-col>
         </v-row>
+        <v-row>
+            <v-col>
+                <br>
+                <hr />
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col>
+                <Cite />
+            </v-col>
+        </v-row>
     </div>
 </template>
 
@@ -65,10 +76,10 @@ export default {
             self.$data.blockDownload = false;
         },
         download_public() {
-            window.open('/data.zip', '_self');
+            window.open(`${this.$config.public.appURL}/data.zip`, '_self');
         },
         download_secure() {
-            window.open(`/${this.$config.public.dataKey}/data.zip`, '_self');
+            window.open(`${this.$config.public.appURL}/${this.$config.public.dataKey}/data.zip`, '_self');
         }
     }
 }

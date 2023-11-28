@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDS.OWID.DataPublisher.Tool.Converter", "IDS.OWID.DataPublisher.Tool.Converter\IDS.OWID.DataPublisher.Tool.Converter.csproj", "{088B8C26-3B81-48F0-B2EE-F79984B9BD65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDS.OWID.DataPublisher.Tool.Converter", "IDS.OWID.DataPublisher.Tool.Converter\IDS.OWID.DataPublisher.Tool.Converter.csproj", "{088B8C26-3B81-48F0-B2EE-F79984B9BD65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDS.OWID.DataPublisher.Tool.Prepper", "IDS.OWID.DataPublisher.Tool.Prepper\IDS.OWID.DataPublisher.Tool.Prepper.csproj", "{5BD872FB-E680-4354-8DEA-B4EF2DE298FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDS.OWID.DataPublisher.Tool.Prepper", "IDS.OWID.DataPublisher.Tool.Prepper\IDS.OWID.DataPublisher.Tool.Prepper.csproj", "{5BD872FB-E680-4354-8DEA-B4EF2DE298FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDS.OWID.DataPublisher.Tool.BasicAuth", "IDS.OWID.DataPublisher.Tool.BasicAuth\IDS.OWID.DataPublisher.Tool.BasicAuth.csproj", "{F32F88D4-0034-4CE5-876F-FF9883F7AD4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5BD872FB-E680-4354-8DEA-B4EF2DE298FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BD872FB-E680-4354-8DEA-B4EF2DE298FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BD872FB-E680-4354-8DEA-B4EF2DE298FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F32F88D4-0034-4CE5-876F-FF9883F7AD4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F32F88D4-0034-4CE5-876F-FF9883F7AD4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F32F88D4-0034-4CE5-876F-FF9883F7AD4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F32F88D4-0034-4CE5-876F-FF9883F7AD4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

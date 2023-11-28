@@ -1,21 +1,29 @@
-﻿
-<Project Sdk="Microsoft.NET.Sdk">
-
-
-    <PropertyGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net7.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="30.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />
-    <PackageReference Include="UI.for.WinForms.AllControls.Net70" Version="2023.2.718" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Reference Include="Telerik.WinControls">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for WinForms R3 2023\Bin70\Telerik.WinControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for WinForms R3 2023\Bin70\Telerik.WinControls.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="TelerikCommon">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for WinForms R3 2023\Bin70\TelerikCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="TelerikData">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for WinForms R3 2023\Bin70\TelerikData.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -23,15 +31,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
-  <ProjectExtensions><VisualStudio><UserProperties ShouldAddDPIScalingManifest="" /></VisualStudio></ProjectExtensions>
-     
-
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties ShouldAddDPIScalingManifest="" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

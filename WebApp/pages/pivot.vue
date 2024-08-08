@@ -29,7 +29,7 @@
         oben links in der Pivot-Tabelle klicken und eigene Vergleiche und Fitlerungen vorzunehmen.</p>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row style="margin-top: -30px;">
       <v-col>
         <DxPivotGrid id="pivotgrid" ref="grid" :data-source="dataSource" :allow-sorting-by-summary="true"
           :allow-filtering="true" :show-borders="true" :show-column-grand-totals="true" :show-row-grand-totals="true"
@@ -45,14 +45,16 @@
           Darstellungsmodi wie folgt ändern:</p>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row style="margin-top: -10px;">
+      <v-col cols="4">
+        <v-combobox label="Darstellungsmodus" variant="outlined" :items="vizModes" v-model="vizMode"></v-combobox>        
+      </v-col>
       <v-col>
-        <v-combobox label="Darstellungsmodus" variant="outlined" :items="vizModes" v-model="vizMode"></v-combobox>
-        <p style="font-size: 9pt; margin-top: -15px;">Bitte beachten Sie: Nicht alle Darstellungsmodi funktionieren für
+        <p style="font-size: 9pt; margin-top: 15px;">Bitte beachten Sie: Nicht alle Darstellungsmodi funktionieren für
           alle Datenkombinationen. Probieren Sie ggf. verschiedene Settings aus.</p>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row style="margin-top: -30px;">
       <v-col>
         <DxChart ref="chart">
           <DxTooltip :enabled="true" :customize-tooltip="customizeTooltip" />
@@ -130,8 +132,7 @@ export default {
       fieldsOriginal: [],
       dataSource: {
         fields: [],
-        store: []
-        ,
+        store: [],
       },
       customizeTooltip(args) {
         return {

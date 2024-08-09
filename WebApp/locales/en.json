@@ -3,9 +3,9 @@
   "footer_Impressum": "Legal Disclosure",
   "footer_Dsgvo": "Privacy Policy",
 
-  "signin_grant_access": "Grant access",
+  "signin_grant_access": "Request full data-set",
   "signin_grant_access_status": "Restricted access",
-  "signin_grant_access_info": "You currently have access to the publicly available data.<br />As a scientist, you can access the entire data set free of charge after registering via KorAP.",
+  "signin_grant_access_info": "You currently have access to the public data-set.<br />As a scientist, you can access the entire data set free of charge after registering via KorAP.",
 
   "signin_access_granted": "Access granted",
   "signin_access_granted_info_1": "Your account",

@@ -35,7 +35,7 @@ import userInfo from "../korapJsClient/userInfo.js";
 export default {
     data() {
         return {
-            Username: "test",
+            Username: "",
             authentication: null,
             userInformation: null,
             isSignedIn: false,

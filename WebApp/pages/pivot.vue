@@ -7,11 +7,8 @@
     </v-row>
     <v-row>
       <v-col>
-        <h2 class="text-xl">Pivot-Tabelle</h2>
-        <p> Die Pivot-Tabelle erlaubt einen interaktiven Auswertung und Kreuz-Vergleiche.
-          Für das Datenset wurden folgende Beispiel-Analysen hinterlegt:
-          Die Visualisierung ist direkt mit der oben angezeigten Pivot-Tabelle verknüpft. Sie können zudem die
-          Darstellungsmodi wie folgt ändern:</p>
+        <h2 class="text-xl">{{ $t('pivot') }}</h2>
+        <p> {{ $t('pivot_profile_info') }} </p>
       </v-col>
     </v-row>
     <v-row>
@@ -23,10 +20,10 @@
     </v-row>
     <v-row>
       <v-col>
-        <p> Alternativ können Sie aufch auf das Einstellungs-Symbol
+        <p> {{ $t('pivot_table_info_1') }}
           (
         <p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
-        oben links in der Pivot-Tabelle klicken und eigene Vergleiche und Fitlerungen vorzunehmen.</p>
+        {{ $t('pivot_table_info_2') }}</p>
       </v-col>
     </v-row>
     <v-row style="margin-top: -30px;">
@@ -40,18 +37,17 @@
     </v-row>
     <v-row>
       <v-col>
-        <h2 class="text-xl">Visualisierung</h2>
-        <p>Die Visualisierung ist direkt mit der oben angezeigten Pivot-Tabelle verknüpft. Sie können zudem die
-          Darstellungsmodi wie folgt ändern:</p>
+        <h2 class="text-xl">{{ $t('visualization') }}</h2>
+        <p>{{ $t('visualization_info') }}</p>
       </v-col>
     </v-row>
     <v-row style="margin-top: -10px;">
       <v-col cols="4">
-        <v-combobox label="Darstellungsmodus" variant="outlined" :items="vizModes" v-model="vizMode"></v-combobox>        
+        <v-combobox :label="$t('visualization_mode')" variant="outlined" :items="vizModes"
+          v-model="vizMode"></v-combobox>
       </v-col>
       <v-col>
-        <p style="font-size: 9pt; margin-top: 15px;">Bitte beachten Sie: Nicht alle Darstellungsmodi funktionieren für
-          alle Datenkombinationen. Probieren Sie ggf. verschiedene Settings aus.</p>
+        <p style="font-size: 9pt; margin-top: 15px;">{{ $t('visualization_mode_info') }}</p>
       </v-col>
     </v-row>
     <v-row style="margin-top: -30px;">
@@ -115,20 +111,8 @@ export default {
   },
   data() {
     return {
-      vizMode: { title: "Balken", value: "bar" },
-      vizModes: [
-        { title: "Balken", value: "bar" },
-        { title: "Linien", value: "line" },
-        { title: "Flächen", value: "area" },
-        { title: "Scatter", value: "scatter" },
-        { title: "Bubble", value: "bubble" },
-        { title: "Balken (gestapelt)", value: "stackedbar" },
-        { title: "Linien (gestapelt)", value: "stackedline" },
-        { title: "Flächen (gestapelt)", value: "stackedarea" },
-        { title: "Balken (auf 100%)", value: "fullstackedbar" },
-        { title: "Linien (auf 100%)", value: "fullstackedline" },
-        { title: "Flächen (auf 100%)", value: "fullstackedarea" },
-      ],
+      vizMode: {},
+      vizModes: [],
       fieldsOriginal: [],
       dataSource: {
         fields: [],
@@ -142,6 +126,21 @@ export default {
     };
   },
   mounted() {
+    this.$data.vizModes = [
+      { title: this.$t("visualization_chart_bars"), value: "bar" },
+      { title: this.$t("visualization_chart_line"), value: "line" },
+      { title: this.$t("visualization_chart_area"), value: "area" },
+      { title: this.$t("visualization_chart_scatter"), value: "scatter" },
+      { title: this.$t("visualization_chart_bubble"), value: "bubble" },
+      { title: this.$t("visualization_chart_bars_stacked"), value: "stackedbar" },
+      { title: this.$t("visualization_chart_line_stacked"), value: "stackedline" },
+      { title: this.$t("visualization_chart_area_stacked"), value: "stackedarea" },
+      { title: this.$t("visualization_chart_bars_percent"), value: "fullstackedbar" },
+      { title: this.$t("visualization_chart_line_percent"), value: "fullstackedline" },
+      { title: this.$t("visualization_chart_area_percent"), value: "fullstackedarea" },
+    ];
+    this.$data.vizMode = { title: this.$t("visualization_chart_bars"), value: "bar" };
+
     if ((new auth()).isSignedIn)
       this.signIn();
     else

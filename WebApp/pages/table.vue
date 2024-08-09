@@ -7,24 +7,20 @@
     </v-row>
     <v-row>
       <v-col>
-        <h2 class="text-xl">Tabelle</h2>
-        <p> Diese Tabellen-Ansicht gibt Ihnen einen direkten Zugriff auf die Daten. Sie können die Tabelle
-          durchsuchen/filtern
-          <Hint :tip="tip_filter"></Hint>. Außerdem können Sie eine Gruppierung vornehmen
-          <Hint :tip="tip_group"></Hint>. Bitte beachten Sie: Die Tabelle zeigt alle Datensätze an - aufgrund der
-          Tabellengröße
-          ist die horizonale und
-          vertikal Darstellung beschnitten. Sie können mit dem Mausrad horizontal und vertikal scrollen
-          <Hint :tip="tip_scroll" />. Außerdem erscheinen Scroll-Leisten, wenn Sie die Maus an den unteren bzw. rechten
-          Rand bewegen. Über das Einstellungs-Symbol (
-        <p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
-        können Sie bestimmen, ob Sie einzelne Spalten ein-/ausblenden möchten.
+        <h2 class="text-xl">{{ $t('table') }}</h2>
+        <p> 
+          {{ $t('table_info_1') }}
+          <Hint :tip="tip_filter"></Hint>. {{ $t('table_info_2') }}
+          <Hint :tip="tip_group"></Hint>. {{ $t('table_info_3') }}
+          <Hint :tip="tip_scroll" />. {{ $t('table_info_4') }} 
+          (<p class="dx-icon dx-icon-columnchooser" style="font-size: 11pt;"></p>)
+          {{ $t('table_info_5') }}
         </p>
       </v-col>
     </v-row>
     <v-row v-if="showAllBtn">
       <v-col>
-        <v-btn prepend-icon="mdi-table" @click="showAll">Alle Daten anzeigen</v-btn>
+        <v-btn prepend-icon="mdi-table" @click="showAll">{{ $t('table_show_all_data') }}</v-btn>
       </v-col>
     </v-row>
     <v-row>
@@ -87,12 +83,16 @@ export default {
         store: []
       },
       showAllBtn: false,
-      tip_filter: "Unterhalb jedes Spaltenkopfs finden Sie eine Eingabebox (siehe Lupen-Symbol).<br/>Sie können nach einem Wert suchen, indem Sie diesen Wert in das entsprechende Feld eingeben.<br/>Mit einem Klick auf das Lupen-Symbol können Sie verschiedene Suchoperatoren auswählen.",
-      tip_group: "Sie können die Tabelle nach einer Spalte gruppieren, indem Sie die Spalte in den Bereich oberhalb der Tabelle ziehen.<br/>Sie können die Gruppierung aufheben, indem Sie die Spalte aus dem oberen Bereich erneut auf die Tabelle ziehen.",
-      tip_scroll: "Fast jede modern Maus verfügt über eine vertikale und horizontale Scroll-Funktion.<br/>Für das vertikale Scrollen tippen Sie ggf. das Mausrat von rechts nach links (bzw. umgekehrt) an."
+      tip_filter: "",
+      tip_group: "",
+      tip_scroll: ""
     };
   },
   mounted() {
+    this.$data.tip_filter = this.$t('table_tip_filter');
+    this.$data.tip_group = this.$t('table_tip_group');
+    this.$data.tip_scroll = this.$t('table_tip_scroll');
+
     if ((new auth()).isSignedIn)
       this.signIn();
     else

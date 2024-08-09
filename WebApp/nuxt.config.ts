@@ -3,20 +3,25 @@ import svgLoader from "vite-svg-loader"
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false,
+  modules: ['@pinia/nuxt', '@nuxtjs/i18n'],
+
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
+
   css: [
     'vuetify/lib/styles/main.sass',
     '@mdi/font/css/materialdesignicons.min.css',
     '~/assets/css/main.css'
   ],
+
   build: {
     transpile: ['vuetify'],
   },
+
   vite: {
     define: {
       'process.env.DEBUG': false,
@@ -25,7 +30,7 @@ export default defineNuxtConfig({
       defaultImport: 'url',
     })],
   },
-  modules: ['@pinia/nuxt', '@nuxt/content'],  
+
   runtimeConfig: {
     public: {
       // The tool "IDS.OWID.DataPublisher.Tool.Prepper" generates the dataKey. Please use it here.
@@ -130,7 +135,10 @@ export default defineNuxtConfig({
       appURL: "https://www.owid.de/plus/gattin2023" // muss an app.baseURL angeglichen werden
     },    
   },
+
   app: {
     baseURL: "/plus/gattin2023" // muss an runtimeConfig.appURL angeglichen werden
-  }
+  },
+
+  compatibilityDate: "2024-08-09"
 })

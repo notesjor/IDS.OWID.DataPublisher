@@ -8,32 +8,28 @@
         <v-row>
             <v-col>
                 <v-card>
-                    <v-card-title>Freier Download</v-card-title>
+                    <v-card-title>{{ $t('download_public_data') }}</v-card-title>
                     <v-card-text>
-                        <p>Laden Sie die öffentlich zugänglichen Daten direkt herunter. Aus diesem Datensatz wurden alle
-                            Informationen entfernt, die Rechte Dritter berühren oder berühren könnten (z. B. Lizenz- oder
-                            Datenschutzrechte). </p>
+                        <p>{{ $t('download_public_data_info') }}</p>
                     </v-card-text>
                     <v-card-actions>
                         <v-btn size="x-large" prepend-icon="mdi-download-outline" color="green-accent-4"
                             @click="download_public">
-                            Download
+                            {{ $t('download') }}
                         </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-col>
             <v-col>
                 <v-card :disabled="blockDownload">
-                    <v-card-title>Erweiterter Download</v-card-title>
+                    <v-card-title>{{ $t('download_restricted_data') }}</v-card-title>
                     <v-card-text>
-                        <p>Mit einer Authentifizierung via KorAP (kostenlose Nutzung für die akademische Forschung) können
-                            Sie den vollständigen Datensatz herunterladen. Bitte beachten Sie evtl. beigelegte Lizenz-
-                            oder Nutzungshinweise.</p>
+                        <p>{{ $t('download_restricted_data_info') }}</p>
                     </v-card-text>
                     <v-card-actions>
                         <v-btn size="x-large" :prepend-icon="blockDownload ? 'mdi-lock' : 'mdi-download-outline'"
                             color="red-accent-4" @click="download_secure">
-                            Download
+                            {{ $t('download') }}
                         </v-btn>
                     </v-card-actions>
                 </v-card>

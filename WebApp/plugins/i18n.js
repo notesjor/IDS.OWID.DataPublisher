@@ -6,7 +6,8 @@ export default defineNuxtPlugin(({ vueApp }) => {
   const i18n = createI18n({
     legacy: false,
     globalInjection: true,
-    locale: 'de',
+    locale: 'en',
+    defaultLocale: 'en',
     messages: {
       en,
       de

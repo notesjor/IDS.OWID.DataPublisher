@@ -1,5 +1,53 @@
 {
   "footer_Contact": "Kontakt",
   "footer_Impressum": "Impressum",
-  "footer_Dsgvo": "Datenschutzhinweis"
+  "footer_Dsgvo": "Datenschutzhinweis",
+
+  "signin_grant_access": "Datensatz freischalten",
+  "signin_grant_access_status": "Eingeschränkter Zugriff",
+  "signin_grant_access_info": "Aktuell haben Sie Zugriff auf die öffentlich verfügbaren Daten.<br />Den gesamten Datensatz können Sie als Wissenschaftler*in, kostenfrei nach einer Anmeldung via KorAP freischalten.",
+
+  "signin_access_granted": "Vollständiger Zugriff",
+  "signin_access_granted_info_1": "Mit ihrer Anmeldung als ",
+  "signin_access_granted_info_2": "haben Sie Zugriff auf den vollständigen Datensatz. Wenn Sie den Datensatz verwenden, zitieren Sie diesen bitte entsprechend.<br /> Bitte sehen Sie davon ab, den vollständigen Datensatz weiterzugeben (auch in veränderter Form) - verweisen Sie stattdessen auf diese Online-Ressource.",
+
+  "cite_text": "Wenn Sie die Daten in eigenen Publikationen oder Produkten verwenden, zitieren Sie diese bitte wie folgt:",
+  "cite_bibtex": "BibTeX-Zitation:",
+
+  "download": "Download",
+  "download_public_data": "Freier Download",
+  "download_public_data_info": "Laden Sie die öffentlich zugänglichen Daten direkt herunter. Aus diesem Datensatz wurden alle Informationen entfernt, die Rechte Dritter berühren oder berühren könnten (z. B. Lizenz- oder Datenschutzrechte).",
+  "download_restricted_data": "Erweiterter Download",
+  "download_restricted_data_info": "Mit einer Authentifizierung via KorAP (kostenlose Nutzung für die akademische Forschung) können Sie den vollständigen Datensatz herunterladen. Bitte beachten Sie evtl. beigelegte Lizenz- oder Nutzungshinweise.",
+
+  "table": "Tabelle",
+  "table_tip_filter": "Unterhalb jedes Spaltenkopfs finden Sie eine Eingabebox (siehe Lupen-Symbol).<br/>Sie können nach einem Wert suchen, indem Sie diesen Wert in das entsprechende Feld eingeben.<br/>Mit einem Klick auf das Lupen-Symbol können Sie verschiedene Suchoperatoren auswählen.",
+  "table_tip_group": "Sie können die Tabelle nach einer Spalte gruppieren, indem Sie die Spalte in den Bereich oberhalb der Tabelle ziehen.<br/>Sie können die Gruppierung aufheben, indem Sie die Spalte aus dem oberen Bereich erneut auf die Tabelle ziehen.",
+  "table_tip_scroll": "Fast jede modern Maus verfügt über eine vertikale und horizontale Scroll-Funktion.<br/>Für das vertikale Scrollen tippen Sie ggf. das Mausrat von rechts nach links (bzw. umgekehrt) an.",
+  "table_info_1": "Diese Tabellen-Ansicht gibt Ihnen einen direkten Zugriff auf die Daten. Sie können die Tabelle durchsuchen/filtern",
+  "table_info_2": "Außerdem können Sie eine Gruppierung vornehmen",
+  "table_info_3": "Bitte beachten Sie: Die Tabelle zeigt alle Datensätze an - aufgrund der Tabellengröße ist die horizonale und vertikal Darstellung beschnitten. Sie können mit dem Mausrad horizontal und vertikal scrollen",
+  "table_info_4": "Außerdem erscheinen Scroll-Leisten, wenn Sie die Maus an den unteren bzw. rechten Rand bewegen. Über das Einstellungs-Symbol",
+  "table_info_5": "können Sie bestimmen, ob Sie einzelne Spalten ein-/ausblenden möchten.",
+  "table_show_all_data": "Alle Daten anzeigen",
+
+  "pivot": "Pivot-Tabelle",
+  "pivot_profile_info": "Die Pivot-Tabelle erlaubt einen interaktiven Auswertung und Kreuz-Vergleiche. Für das Datenset wurden folgende Beispiel-Analysen hinterlegt: Die Visualisierung ist direkt mit der oben angezeigten Pivot-Tabelle verknüpft. Sie können zudem die Darstellungsmodi wie folgt ändern:",
+  "pivot_table_info_1": "Alternativ können Sie auch auf das Einstellungs-Symbol",
+  "pivot_table_info_2": "oben links in der Pivot-Tabelle klicken und eigene Vergleiche und Filterungen vorzunehmen.",
+  "visualization": "Visualisierung",
+  "visualization_info": "Die Visualisierung ist direkt mit der oben angezeigten Pivot-Tabelle verknüpft. Sie können zudem die Darstellungsmodi wie folgt ändern:",
+  "visualization_mode": "Darstellungsmodus",
+  "visualization_mode_info": "Bitte beachten Sie: Nicht alle Darstellungsmodi funktionieren für alle Datenkombinationen. Probieren Sie ggf. verschiedene Settings aus.",
+  "visualization_chart_bars": "Balken",
+  "visualization_chart_line": "Linien",
+  "visualization_chart_area": "Flächen",
+  "visualization_chart_scatter": "Scatter",
+  "visualization_chart_bubble": "Bubble",
+  "visualization_chart_bars_stacked": "Balken (gestapelt)",
+  "visualization_chart_line_stacked": "Linien (gestapelt)",
+  "visualization_chart_area_stacked": "Flächen (gestapelt)",
+  "visualization_chart_bars_percent": "Balken (auf 100%)",
+  "visualization_chart_line_percent": "Linien (auf 100%)",
+  "visualization_chart_area_percent": "Flächen (auf 100%)"
 }

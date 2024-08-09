@@ -1,5 +1,53 @@
 {
   "footer_Contact": "Contact",
   "footer_Impressum": "Legal Disclosure",
-  "footer_Dsgvo": "Privacy Policy"
+  "footer_Dsgvo": "Privacy Policy",
+
+  "signin_grant_access": "Grant access",
+  "signin_grant_access_status": "Restricted access",
+  "signin_grant_access_info": "You currently have access to the publicly available data.<br />As a scientist, you can access the entire data set free of charge after registering via KorAP.",
+
+  "signin_access_granted": "Access granted",
+  "signin_access_granted_info_1": "Your account",
+  "signin_access_granted_info_2": "has granted full access. If you use the data set, please cite it accordingly.<br /> Please do not pass parts or the complete data set (even in modified form) - instead, please refer to this online resource.",
+
+  "cite_text": "If you use the data in your own publications or products, please cite them as follows:",
+  "cite_bibtex": "BibTeX-citation:",
+
+  "download": "Download",
+  "download_public_data": "Public data",
+  "download_public_data_info": "Download the publicly accessible data directly. All information that affects or could affect the rights of third parties (e.g. license or data protection rights) has been removed from this data set.",
+  "download_restricted_data": "Full data access",
+  "download_restricted_data_info": "With an authentication via KorAP (free use for academic research) you can download the complete data set. Please note any enclosed license or usage information.",
+
+  "table": "Table",
+  "table_tip_filter": "Below each column header you will find an input box (see magnifying glass symbol).<br/>You can search for a value by entering this value in the corresponding field.<br/>You can select various search operators by clicking on the magnifying glass symbol.",
+  "table_tip_group": "You can group the table by a column by dragging the column into the area above the table.<br/>You can remove the grouping by dragging the column from the upper area onto the table again.",
+  "table_tip_scroll": "Almost every modern mouse has a vertical and horizontal scroll function.<br/>To scroll vertically, tap the mouse wheel from right to left (or vice versa).",
+  "table_info_1": "This table view gives you direct access to the data. You can search/filter the table",
+  "table_info_2": "You can also group the data",
+  "table_info_3": "Please note: The table shows all data records - due to the table size, the horizontal and vertical display is cropped. You can scroll horizontally and vertically with the mouse wheel",
+  "table_info_4": "Scroll bars also appear when you move the mouse to the bottom or right edge. You can use the settings icon",
+  "table_info_5": "to determine whether you want to show/hide individual columns.",
+  "table_show_all_data": "Show all data",
+
+  "pivot": "Pivot-Table",
+  "pivot_profile_info": "The pivot table allows interactive evaluation and cross-comparisons. The following sample analyses have been stored for the data set: The visualization is directly linked to the pivot table displayed above. You can also change the display modes as follows:",
+  "pivot_table_info_1": "Alternatively, you can click on the settings icon",
+  "pivot_table_info_2": " at the top left of the pivot table and make your own comparisons and filters.",
+  "visualization": "Visualization",
+  "visualization_info": "The visualization is directly linked to the pivot table displayed above. You can also change the display modes as follows:",
+  "visualization_mode": "Displaymode",
+  "visualization_mode_info": "Please note: Not all display modes work for all data combinations. Try out different settings if necessary.",
+  "visualization_chart_bars": "Bar-Chart",
+  "visualization_chart_line": "Line-Chart",
+  "visualization_chart_area": "Area-Chart",
+  "visualization_chart_scatter": "Scatter-Chart",
+  "visualization_chart_bubble": "Bubble-Chart",
+  "visualization_chart_bars_stacked": "Bar-Chart (stacked)",
+  "visualization_chart_line_stacked": "Line-Chart (stacked)",
+  "visualization_chart_area_stacked": "Area-Chart (stacked)",
+  "visualization_chart_bars_percent": "Bar-Chart (100%)",
+  "visualization_chart_line_percent": "Line-Chart (100%)",
+  "visualization_chart_area_percent": "Area-Chart (100%)"
 }

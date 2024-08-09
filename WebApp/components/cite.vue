@@ -6,7 +6,7 @@
             </v-col>
         </v-row>
         <v-row>
-            <div class="v-card-text" style="margin:-20px 0px 0px 10px">Wenn Sie die Daten in eigenen Publikationen oder Produkten verwenden, zitieren Sie diese bitte wie folgt:</div>
+            <div class="v-card-text" style="margin:-20px 0px 0px 10px">{{ $t('cite_text') }}</div>
         </v-row>
         <v-row>
             <v-col>
@@ -16,7 +16,7 @@
             </v-col>
         </v-row>
         <v-row>
-            <div class="v-card-text" style="margin:-20px 0px 0px 10px">BibTeX-Zitation:</div>
+            <div class="v-card-text" style="margin:-20px 0px 0px 10px">{{ $t('cite_bibtex') }}</div>
         </v-row>
         <v-row>
             <v-col>

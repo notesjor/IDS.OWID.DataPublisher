@@ -109,14 +109,6 @@ export default {
     this.footerContact = this.$config.public.footerContact;
     this.footerImpressum = this.$config.public.footerImpressum;
     this.footerDsgvo = this.$config.public.footerDsgvo;
-
-    queryContent("/page").find().then((x) => {
-      this.pages = x;
-    });
-
-    queryContent("/info").find().then((x) => {
-      this.infos = x;
-    });
   },
 }
 </script>

@@ -9,26 +9,27 @@
 		"postinstall": "nuxt prepare"
 	},
 	"devDependencies": {
-		"@mdi/font": "^7.2.96",
-		"@mdi/js": "^7.2.96",
-		"@nuxt/content": "^2.8.1",
-		"autoprefixer": "^10.4.15",
-		"nuxt": "^3.3.2",
-		"postcss": "^8.4.29",
-		"sass": "^1.60.0",
-		"sitemap": "^7.1.1",
-		"tailwindcss": "^3.3.3",
+		"@mdi/font": "^7.4.47",
+		"@mdi/js": "^7.4.47",
+		"@nuxt/content": "^2.13.2",
+		"@nuxtjs/i18n": "^8.3.3",
+		"autoprefixer": "^10.4.20",
+		"nuxt": "^3.12.4",
+		"postcss": "^8.4.41",
+		"sass": "^1.77.8",
+		"sitemap": "^7.1.2",
+		"tailwindcss": "^3.4.9",
 		"vite-svg-loader": "^4.0.0",
-		"vue-i18n": "^9.2.2"
+		"vue-i18n": "^9.13.1"
 	},
 	"dependencies": {
-		"@pinia/nuxt": "^0.4.7",
+		"@pinia/nuxt": "^0.4.11",
 		"devextreme": "23.1.4",
 		"devextreme-vue": "23.1.4",
-		"jquery": "^3.7.0",
-		"pinia": "^2.0.33",
+		"jquery": "^3.7.1",
+		"pinia": "^2.2.1",
 		"pivottable": "^2.23.0",
-		"vuetify": "^3.1.11"
+		"vuetify": "^3.6.14"
 	},
 	"overrides": {
 		"vue": "latest"
